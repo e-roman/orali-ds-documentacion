@@ -5,19 +5,18 @@ import { sbPatterns, type SbPattern } from "@/lib/sb-patterns"
 import { LIVE } from "@/lib/live-stories"
 import { resolveShot } from "@/lib/shot-file"
 import LiveStory from "./live"
-import { SB, docsId, storyId } from "@/lib/storybook"
+import { SB, docsId } from "@/lib/storybook"
 
 export { sbPatterns }
 
-/** Patrones armados con datos o fotos de la tienda: se muestran con capturas de Storybook (cargan rápido) y un link a la story real. */
+/** Patrones armados con datos o fotos de la tienda: se muestran con capturas de Storybook (cargan rápido). El link a Storybook va en el encabezado de la página. */
 export function storybookPanel(p: SbPattern) {
   const items = p.shots.map((s, i) => {
     const { src, w, h } = resolveShot(p.slug, i, s.w)
-    const id = storyId(s.story[0], s.story[1])
     return {
       value: `${i}`,
       label: s.label,
-      caption: <>{s.label}{LIVE[p.slug]?.[i] ? " (componente real)" : ""}. <a href={`${SB}/?path=/story/${id}`} target="_blank" rel="noopener noreferrer">Abrir en Storybook ↗</a></>,
+      caption: <>{s.label}{LIVE[p.slug]?.[i] ? " (componente real)" : ""}.</>,
       node: LIVE[p.slug]?.[i]
         ? <LiveStory slug={p.slug} index={i} />
         : <img className="sb-shot" src={src} width={w} height={h} alt={`${p.title}: ${s.label}`} loading="lazy" decoding="async" />,
