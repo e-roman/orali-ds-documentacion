@@ -1,0 +1,158 @@
+{
+ "/patterns/nav-0.jpg": [
+  1280,
+  166
+ ],
+ "/patterns/nav-1.jpg": [
+  390,
+  161
+ ],
+ "/patterns/nav-2.jpg": [
+  448,
+  320
+ ],
+ "/patterns/nav-3.jpg": [
+  390,
+  760
+ ],
+ "/patterns/nav-4.jpg": [
+  1280,
+  81
+ ],
+ "/patterns/footer-0.jpg": [
+  1280,
+  373
+ ],
+ "/patterns/footer-1.jpg": [
+  1280,
+  373
+ ],
+ "/patterns/hero-0.jpg": [
+  1280,
+  624
+ ],
+ "/patterns/promo-banner-0.jpg": [
+  1248,
+  288
+ ],
+ "/patterns/newsletter-banner-0.jpg": [
+  1280,
+  260
+ ],
+ "/patterns/product-card-0.jpg": [
+  388,
+  480
+ ],
+ "/patterns/product-card-1.jpg": [
+  388,
+  480
+ ],
+ "/patterns/product-card-2.jpg": [
+  388,
+  480
+ ],
+ "/patterns/product-card-3.jpg": [
+  1068,
+  387
+ ],
+ "/patterns/product-detail-0.jpg": [
+  1248,
+  665
+ ],
+ "/patterns/product-detail-1.jpg": [
+  668,
+  480
+ ],
+ "/patterns/product-detail-2.jpg": [
+  448,
+  354
+ ],
+ "/patterns/product-detail-3.jpg": [
+  968,
+  480
+ ],
+ "/patterns/cart-item-0.jpg": [
+  768,
+  130
+ ],
+ "/patterns/cart-item-1.jpg": [
+  408,
+  122
+ ],
+ "/patterns/cart-drawer-0.jpg": [
+  520,
+  760
+ ],
+ "/patterns/cart-drawer-1.jpg": [
+  520,
+  760
+ ],
+ "/patterns/cart-drawer-2.jpg": [
+  520,
+  760
+ ],
+ "/patterns/min-order-progress-0.jpg": [
+  420,
+  100
+ ],
+ "/patterns/min-order-progress-1.jpg": [
+  420,
+  100
+ ],
+ "/patterns/min-order-progress-2.jpg": [
+  408,
+  48
+ ],
+ "/patterns/order-summary-0.jpg": [
+  448,
+  482
+ ],
+ "/patterns/order-summary-1.jpg": [
+  448,
+  482
+ ],
+ "/patterns/shipping-form-0.jpg": [
+  688,
+  572
+ ],
+ "/patterns/shipping-form-1.jpg": [
+  688,
+  664
+ ],
+ "/patterns/order-review-0.jpg": [
+  688,
+  431
+ ],
+ "/patterns/order-review-1.jpg": [
+  688,
+  98
+ ],
+ "/patterns/logo-0.jpg": [
+  175,
+  55
+ ],
+ "/patterns/logo-1.jpg": [
+  210,
+  66
+ ],
+ "/patterns/logo-2.jpg": [
+  102,
+  32
+ ],
+ "/patterns/text-0.jpg": [
+  668,
+  24
+ ],
+ "/patterns/text-1.jpg": [
+  668,
+  328
+ ],
+ "/patterns/layout-0.jpg": [
+  568,
+  48
+ ],
+ "/patterns/layout-1.jpg": [
+  568,
+  168
+ ]
+}

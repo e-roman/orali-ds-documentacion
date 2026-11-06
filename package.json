@@ -1,0 +1,37 @@
+{
+  "name": "orali-docs",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev -p 3200",
+    "build": "next build",
+    "start": "next start -p 3200",
+    "sync:assets": "node scripts/sync-shop-assets.mjs",
+    "predev": "node scripts/sync-shop-assets.mjs",
+    "prebuild": "node scripts/sync-shop-assets.mjs",
+    "prestart": "node scripts/sync-shop-assets.mjs"
+  },
+  "dependencies": {
+    "@mdx-js/loader": "^3.0.1",
+    "@mdx-js/react": "^3.0.1",
+    "@next/mdx": "14.2.3",
+    "@orali/design-tokens": "github:e-roman/orali-design-tokens#v4.1.0",
+    "clsx": "^2.1.1",
+    "lucide-react": "^0.383.0",
+    "next": "14.2.3",
+    "react": "^18",
+    "react-dom": "^18",
+    "sonner": "^2.0.8"
+  },
+  "devDependencies": {
+    "@types/mdx": "^2.0.13",
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "autoprefixer": "^10.6.2",
+    "postcss": "^8.5.32",
+    "postcss-import": "^15.1.0",
+    "tailwindcss": "^3.4.19",
+    "typescript": "^5"
+  }
+}

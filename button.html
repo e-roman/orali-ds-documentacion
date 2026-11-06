@@ -1,0 +1,469 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><title>Button · Orali DS</title>
+<!-- Tokens: se consumen desde dist/, nunca copiados. Se lee del repo de tokens vecino (C:\next-projects\orali-design-tokens). -->
+<link rel="stylesheet" href="../orali-design-tokens/dist/tokens.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap">
+<style>
+/* ===== Estilo de la doc: mismo sistema que orali-zh-color/html ===== */
+:root{--bg:#fff;--fg:#1c1b1a;--mut:#5c5955;--line:#e4e1dd;--soft:#f7f5f2;--brand:#E30613;--sage:#15803D;--warnbg:#fff7d6;--warnbd:#d9a900;--ora-bg:#fff0e0;--ora-bd:#e8710a}
+@media (prefers-color-scheme:dark){:root{--bg:#171615;--fg:#f1efec;--mut:#aaa59f;--line:#34322f;--soft:#211f1e;--warnbg:#3a3200;--warnbd:#b58f00;--ora-bg:#3b2410;--ora-bd:#c25d06}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+a{color:inherit}
+.layout{display:grid;grid-template-columns:270px minmax(0,1fr);min-height:100vh}
+nav.side{position:sticky;top:0;align-self:start;height:100vh;overflow:auto;border-right:1px solid var(--line);padding:20px 14px;background:var(--soft);font-size:14px}
+nav.side .brand{display:block;font-weight:700;font-size:17px;text-decoration:none;margin-bottom:14px}
+nav.side .brand span{display:block;font-weight:400;font-size:12px;color:var(--mut)}
+.sect{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--mut);margin:16px 0 4px}
+nav.side ul{list-style:none;margin:0;padding:0}
+nav.side li a,nav.side li span{display:block;padding:4px 8px;border-radius:6px;text-decoration:none}
+nav.side li a:hover{background:var(--line)}
+nav.side li.sub a{padding-left:22px;font-size:13px;color:var(--mut)}
+nav.side li.cur>a{background:var(--brand);color:#fff}
+nav.side li.off span{color:var(--mut);opacity:.5;cursor:default}
+.wrap{max-width:900px;width:100%;margin:0 auto;padding:32px 24px 80px}
+.crumb{color:var(--mut);font-size:13px;margin-bottom:8px}
+h1{font-size:36px;line-height:1.15;margin:0 0 8px}
+.intro{font-size:19px;color:var(--mut);margin:0 0 24px}
+.tabbar{display:flex;gap:6px;flex-wrap:wrap;position:sticky;top:0;background:var(--bg);padding:10px 0;border-bottom:1px solid var(--line);z-index:5}
+.tabbar a{padding:6px 14px;border-radius:999px;border:1px solid var(--line);text-decoration:none;font-size:14px}
+.tabbar a:hover{background:var(--soft)}
+.tabbar a.on{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+section.tab{margin-top:36px;scroll-margin-top:70px}
+section.tab>h2.tabname{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--brand);margin:0 0 16px;display:flex;align-items:center;gap:10px}
+section.tab>h2.tabname::after{content:"";flex:1;height:1px;background:var(--line)}
+h3{font-size:24px;margin:28px 0 8px} h4{font-size:19px;margin:22px 0 6px}
+code{background:var(--soft);border:1px solid var(--line);border-radius:4px;padding:1px 6px;font-size:.88em;word-break:break-word}
+pre.codeblock{background:var(--soft);border:1px solid var(--line);border-radius:8px;padding:12px 14px;overflow:auto;font-size:13px}
+pre.codeblock code{border:0;background:none;padding:0}
+.tablewrap{overflow-x:auto;margin:14px 0}
+table{border-collapse:collapse;width:100%;font-size:15px}
+th,td{border:1px solid var(--line);padding:9px 12px;text-align:left;vertical-align:top}
+th{background:var(--soft)}
+.sw{display:inline-block;width:14px;height:14px;border-radius:3px;border:1px solid var(--line);vertical-align:-2px;margin-right:6px}
+.callout{border-left:4px solid var(--sage);background:var(--soft);padding:12px 16px;border-radius:0 8px 8px 0;margin:16px 0}
+.callout p{margin:6px 0}
+.tag{display:inline-block;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--mut);background:var(--bg);border:1px dashed var(--line);border-radius:4px;padding:1px 7px;margin-bottom:6px}
+.imgreal{margin:18px 0;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.imgreal .stage{background:#fff;padding:28px 24px;text-align:center}
+.imgreal figcaption{padding:10px 14px;font-size:14px;border-top:1px solid var(--line);color:var(--mut)}
+.rules{list-style:none;padding:0;margin:16px 0;display:grid;gap:8px}
+.rules li{display:flex;gap:10px;align-items:flex-start;padding:10px 14px;border:1px solid var(--line);border-radius:8px;border-left-width:4px}
+.rules li.do{border-left-color:var(--sage)} .rules li.dont{border-left-color:var(--brand)} .rules li.caution{border-left-color:#b7791f}
+.badge{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;white-space:nowrap;padding:2px 8px;border-radius:4px;background:var(--soft)}
+.tokens{border:1px dashed var(--line);border-radius:10px;padding:12px 14px;margin:16px 0}
+.hint{font-size:13px;color:var(--mut);margin:2px 0;word-break:break-word}
+.pend{background:var(--warnbg);border:1px solid var(--warnbd);border-left-width:5px;border-radius:8px;padding:10px 14px;margin:14px 0;font-size:15px}
+.pend.inline{display:inline;padding:1px 6px;margin:0;font-size:12px;border-left-width:1px;font-weight:700;letter-spacing:.03em}
+.desf{background:var(--ora-bg);border:1px solid var(--ora-bd);border-left-width:5px;border-radius:8px;padding:10px 14px;margin:14px 0;font-size:15px}
+.sb{border:1px dashed var(--mut);border-radius:8px;padding:30px;text-align:center;color:var(--mut);margin:14px 0}
+.note{background:var(--soft);border:1px solid var(--line);border-radius:8px;padding:10px 14px;font-size:14px;color:var(--mut);margin-bottom:20px}
+ul.plain{padding-left:20px}
+@media(max-width:900px){.layout{grid-template-columns:1fr}nav.side{position:static;height:auto;max-height:260px;border-right:0;border-bottom:1px solid var(--line)}}
+@media(max-width:600px){h1{font-size:28px}.wrap{padding:20px 16px 60px}}
+
+/* ===== Agregados para ejemplos en vivo ===== */
+.imgreal .stage.row{display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:center}
+.imgreal .stage.dark{background:#1A1A1A}
+.imgreal .stage.col{display:flex;flex-direction:column;gap:18px;align-items:center}
+.hiercards{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px;margin:14px 0}
+.hiercards .imgreal{margin:0}
+.hiercards .stage{padding:22px 16px}
+.hiercards figcaption{color:var(--fg)}
+.hiercards figcaption b{display:block;font-size:15px;margin-bottom:2px}
+.hiercards figcaption ul{margin:6px 0 0;padding-left:18px;font-size:13.5px;color:var(--mut)}
+.hiercards figcaption .no{color:var(--brand);font-weight:700;font-size:11px;letter-spacing:.05em;text-transform:uppercase;display:block;margin-top:8px}
+.matrix{display:grid;grid-template-columns:96px repeat(6,minmax(104px,1fr));gap:12px 8px;align-items:center;text-align:left;min-width:780px}
+.matrix .hd{font-size:11px;font-weight:700;color:#5c5955;text-transform:uppercase;letter-spacing:.06em}
+.matrix .rl{font:600 13px ui-monospace,Consolas,monospace;color:#1c1b1a}
+.matrix .cell.dark{background:#1A1A1A;padding:6px;border-radius:8px}
+.imgreal .stage.scroll{overflow-x:auto}
+.anat{position:relative;display:inline-block;margin:26px 44px}
+.mk{position:absolute;transform:translate(-50%,-50%);width:22px;height:22px;border-radius:50%;background:#E30613;color:#fff;font:700 12px/22px system-ui;text-align:center;box-shadow:0 0 0 2px #fff}
+.hitbox{position:relative;display:inline-flex;align-items:center;justify-content:center}
+.hitbox::after{content:"";position:absolute;width:100%;min-width:44px;height:44px;border:1.5px dashed #E30613;border-radius:4px;pointer-events:none}
+.ok{color:var(--sage);font-weight:700}.bad{color:var(--brand);font-weight:700}
+.src{font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--mut);border:1px dashed var(--mut);border-radius:4px;padding:0 6px;margin-left:6px;white-space:nowrap}
+
+/* ===== Componente Button: spec de referencia, 100% tokens ===== */
+.btn{
+  --h:var(--button-size-md-height);--py:var(--button-size-md-padding-y);--px:var(--button-size-md-padding-x);
+  --g:var(--button-size-md-gap);--fs:var(--button-size-md-font-size);--lh:var(--button-size-md-line-height);--ic:var(--button-size-md-icon-size);
+  position:relative;display:inline-flex;align-items:center;justify-content:center;gap:var(--g);
+  min-height:var(--h);padding:var(--py) var(--px);
+  font-family:var(--font-family-sans);font-size:var(--fs);line-height:var(--lh);font-weight:var(--fw);
+  border-radius:var(--r);border:var(--border-width-sm) solid var(--bd,transparent);
+  background:var(--bg);color:var(--fg);cursor:pointer;text-decoration:none;white-space:nowrap;
+  transition:background-color var(--motion-transition-fast),color var(--motion-transition-fast),border-color var(--motion-transition-fast);
+}
+.btn svg{width:var(--ic);height:var(--ic);flex:none}
+.btn[data-size=sm]{--h:var(--button-size-sm-height);--py:var(--button-size-sm-padding-y);--px:var(--button-size-sm-padding-x);--g:var(--button-size-sm-gap);--fs:var(--button-size-sm-font-size);--lh:var(--button-size-sm-line-height);--ic:var(--button-size-sm-icon-size)}
+.btn[data-size=lg]{--h:var(--button-size-lg-height);--py:var(--button-size-lg-padding-y);--px:var(--button-size-lg-padding-x);--g:var(--button-size-lg-gap);--fs:var(--button-size-lg-font-size);--lh:var(--button-size-lg-line-height);--ic:var(--button-size-lg-icon-size)}
+.btn[data-size=xl]{--h:var(--button-size-xl-height);--py:var(--button-size-xl-padding-y);--px:var(--button-size-xl-padding-x);--g:var(--button-size-xl-gap);--fs:var(--button-size-xl-font-size);--lh:var(--button-size-xl-line-height);--ic:var(--button-size-xl-icon-size)}
+.btn[data-h=primary]{--bg:var(--button-primary-bg);--bg-h:var(--button-primary-bg-hover);--bg-a:var(--button-primary-bg-active);--fg:var(--button-primary-fg);--fw:var(--button-primary-font-weight);--r:var(--button-primary-radius)}
+.btn[data-h=add-to-cart]{--bg:var(--button-add-to-cart-bg);--bg-h:var(--button-add-to-cart-bg-hover);--bg-a:var(--button-add-to-cart-bg-active);--fg:var(--button-add-to-cart-fg);--fw:var(--button-add-to-cart-font-weight);--r:var(--button-add-to-cart-radius)}
+.btn[data-h=secondary]{--bg:var(--button-secondary-bg);--bg-h:var(--button-secondary-bg-hover);--bg-a:var(--button-secondary-bg-active);--fg:var(--button-secondary-fg);--fw:var(--button-secondary-font-weight);--r:var(--button-secondary-radius)}
+.btn[data-h=outline]{--bg:var(--button-outline-bg);--bg-h:var(--button-outline-bg-hover);--bg-a:var(--button-outline-bg-active);--fg:var(--button-outline-fg);--fg-h:var(--button-outline-fg-hover);--fg-a:var(--button-outline-fg-active);--bd:var(--button-outline-border);--fw:var(--button-outline-font-weight);--r:var(--button-outline-radius)}
+.btn[data-h=neutral]{--bg:var(--button-neutral-bg);--bg-h:var(--button-neutral-bg-hover);--bg-a:var(--button-neutral-bg-active);--fg:var(--button-neutral-fg);--bd:var(--button-neutral-border);--fw:var(--button-neutral-font-weight);--r:var(--button-neutral-radius)}
+.btn[data-h=inverse]{--bg:var(--button-inverse-bg);--bg-h:var(--button-inverse-bg-hover);--bg-a:var(--button-inverse-bg-active);--fg:var(--button-inverse-fg);--fw:var(--button-inverse-font-weight);--r:var(--button-inverse-radius)}
+.btn[data-h=link]{--bg:transparent;--bg-h:transparent;--bg-a:transparent;--fg:var(--button-link-fg);--fg-h:var(--button-link-fg-hover);--fg-a:var(--button-link-fg-active);--fw:var(--button-link-font-weight);--r:var(--button-shape-default);--px:var(--button-link-padding-x);text-decoration:var(--button-link-text-decoration)}
+.btn[data-h=ghost]{--bg:var(--button-ghost-bg);--bg-h:var(--button-ghost-bg);--bg-a:var(--button-ghost-bg);--fg:var(--button-ghost-fg);--fg-h:var(--button-ghost-fg-hover);--fg-a:var(--button-ghost-fg-active);--fw:var(--button-ghost-font-weight);--r:var(--button-shape-default);--px:var(--button-ghost-padding-x)}
+.btn[data-shape=pill]{--r:var(--button-shape-pill)}
+.btn[data-icon-only]{--px:var(--py);aspect-ratio:1}
+.btn:hover,.btn.is-hover{background:var(--bg-h);color:var(--fg-h,var(--fg))}
+.btn:active,.btn.is-active{background:var(--bg-a);color:var(--fg-a,var(--fg-h,var(--fg)))}
+.btn[data-h=link]:hover,.btn[data-h=link].is-hover{text-decoration:var(--button-link-text-decoration-hover)}
+.btn:focus-visible,.btn.is-focus{outline:var(--button-focus-width) solid var(--button-focus-ring);outline-offset:var(--button-focus-offset)}
+.dark .btn:focus-visible,.dark .btn.is-focus{outline-color:var(--color-focus-ring-inverse)}
+.btn:is(:disabled,[aria-disabled=true],.is-disabled):not(.is-loading){background:var(--button-disabled-bg);color:var(--button-disabled-fg);cursor:not-allowed;text-decoration:none}
+.btn:is([data-h=outline],[data-h=neutral]):is(:disabled,[aria-disabled=true],.is-disabled):not(.is-loading){border-color:var(--button-disabled-border)}
+.btn:is([data-h=link],[data-h=ghost]):is(:disabled,[aria-disabled=true],.is-disabled):not(.is-loading){background:transparent;color:var(--button-disabled-link-fg)}
+.btn.is-loading{color:transparent!important;cursor:progress;pointer-events:none}
+.btn.is-loading>*{visibility:hidden}
+.btn.is-loading::after{content:"";position:absolute;width:var(--ic);height:var(--ic);border:2px solid var(--fg);border-right-color:transparent;border-radius:50%;animation:spin .7s linear infinite}
+@keyframes spin{to{transform:rotate(1turn)}}
+@media (prefers-reduced-motion:reduce){.btn{transition:none}.btn.is-loading::after{animation-duration:2s}}
+</style></head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-cart" viewBox="0 0 24 24"><path d="M3 4h2l2.4 11.2a1 1 0 0 0 1 .8h8.8a1 1 0 0 0 1-.8L20 8H6.2M9 20.5a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1Zm8 0a.5.5 0 1 0 0-1 .5.5 0 0 0 0 1Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+</svg>
+<div class="layout">
+<nav class="side">
+  <a class="brand" href="button.html">Orali <span>Design System · borrador local</span></a>
+  <div class="sect">Components</div>
+  <ul>
+    <li class="cur"><a href="button.html">Button</a></li>
+    <li class="sub"><a href="#t0">Visión general</a></li>
+    <li class="sub"><a href="#t1">Uso</a></li>
+    <li class="sub"><a href="#t2">Variantes y estados</a></li>
+    <li class="sub"><a href="#t3">Accesibilidad</a></li>
+    <li class="sub"><a href="#t4">Código</a></li>
+    <li class="sub"><a href="#t5">Revisión</a></li>
+    <li class="off"><span>Stepper · próximo</span></li>
+  </ul>
+</nav>
+<main class="wrap">
+<div class="crumb">Components / Actions</div>
+<h1>Button</h1>
+<p class="intro">Dispara una acción en la misma pantalla. Siete jerarquías en el sitio, cuatro tamaños y seis estados.</p>
+<nav class="tabbar"><a href="#t0">Visión general</a><a href="#t1">Uso</a><a href="#t2">Variantes y estados</a><a href="#t3">Accesibilidad</a><a href="#t4">Código</a><a href="#t5">Revisión</a></nav>
+<div id="tokwarn"></div>
+
+<!-- ============ VISIÓN GENERAL ============ -->
+<section class="tab" id="t0"><h2 class="tabname">Pestaña: Visión general</h2>
+<figure class="imgreal"><div class="stage row">
+  <button class="btn" data-h="primary" data-size="lg"><span>Ver productos</span></button>
+  <button class="btn" data-h="add-to-cart"><span>Agregar</span></button>
+  <button class="btn" data-h="secondary"><span>Aplicar cupón</span></button>
+  <button class="btn" data-h="outline" data-size="lg"><span>Ingresar</span></button>
+  <button class="btn" data-h="neutral"><span>Cancelar</span></button>
+  <button class="btn" data-h="link"><span>Editar dirección</span></button>
+</div><div class="stage row dark"><button class="btn" data-h="inverse"><span>Ver productos</span></button></div>
+<figcaption>En vivo, con <code>dist/tokens.css</code>: las 7 jerarquías del sitio. Inverse va sobre foto o superficie oscura.</figcaption></figure>
+<p>Tiene tres ejes independientes: <strong>Hierarchy</strong>, <strong>Size</strong> y <strong>State</strong>. La jerarquía define <strong>colores, radius y peso</strong>. El tamaño define <strong>alto, padding, gap, tipografía e ícono</strong>.</p>
+
+<h3>Cuándo usarlo</h3>
+<ul><li>Para acciones del flujo de compra: agregar, continuar, finalizar.</li><li>Para acciones de formulario y de cuenta.</li><li>Un solo Primary por sección visible.</li></ul>
+<h3>Cuándo no usarlo</h3>
+<ul><li>Para navegar: usá un link (<code>&lt;a href&gt;</code>), aunque tenga estilo de botón.</li><li>Para mostrar un estado o una etiqueta: eso es un Badge.</li></ul>
+
+<h3>Anatomía</h3>
+<figure class="imgreal"><div class="stage">
+  <div class="anat">
+    <button class="btn" data-h="primary" data-size="xl" tabindex="-1"><svg aria-hidden="true"><use href="#i-cart"/></svg><span>Agregar al carrito</span><svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
+    <b class="mk" style="left:-22px;top:50%">1</b><b class="mk" style="left:50%;top:-18px">2</b><b class="mk" style="left:34px;top:calc(100% + 18px)">3</b><b class="mk" style="left:calc(100% - 34px);top:calc(100% + 18px)">4</b>
+  </div>
+</div><figcaption>Anatomía en vivo, tamaño xl</figcaption></figure>
+<div class="tablewrap"><table>
+<tr><th>#</th><th>Elemento</th><th>Tokens</th></tr>
+<tr><td>1</td><td>Contenedor</td><td><code>button.{hierarchy}.bg|radius|border</code> · <code>button.size.{size}.height|padding-*</code></td></tr>
+<tr><td>2</td><td>Label</td><td><code>button.{hierarchy}.fg|font-weight</code> · <code>button.size.{size}.font-size|line-height</code></td></tr>
+<tr><td>3</td><td>Ícono izquierdo (opcional)</td><td><code>button.size.{size}.icon-size|gap</code>. Hereda <code>currentColor</code></td></tr>
+<tr><td>4</td><td>Ícono derecho (opcional)</td><td>Igual que 3. Dirección o avance (→)</td></tr>
+</table></div>
+
+<h3>Propiedades</h3>
+<div class="tablewrap"><table>
+<tr><th>Propiedad</th><th>Valores</th><th>Figma</th></tr>
+<tr><td><strong>Hierarchy</strong></td><td>primary · add-to-cart · secondary · outline · neutral · inverse · link</td><td>Primary, Secondary, Outline, Neutral, Link, <b>Ghost</b>, <b>Destructive</b> <span class="src">ver Revisión</span></td></tr>
+<tr><td><strong>Size</strong></td><td>sm · md · lg · xl</td><td>Coincide (36 / 40 / 44 / 48)</td></tr>
+<tr><td><strong>State</strong></td><td>default · hover · active · focus · disabled · loading</td><td>Default, Hover, Focused, Disabled. <b>Sin Active ni Loading</b></td></tr>
+<tr><td><strong>Shape</strong></td><td>default · pill</td><td><b>No existe</b> como propiedad</td></tr>
+<tr><td><strong>Icon</strong></td><td>none · leading · trailing · icon-only</td><td>Icon button aparte («Buttons/Button/Icon»), md</td></tr>
+</table></div>
+
+<h3>Variantes relacionadas</h3>
+<ul><li><strong>Icon button</strong> (Figma «Buttons/Button/Icon»): solo ícono, hoy en md, con las mismas jerarquías y estados.</li><li><strong>Social button</strong>: Google y Apple, con o sin <code>Supporting text</code>. El login usa solo esos dos.</li><li><strong>Social button group</strong>: en formato botones o íconos.</li></ul>
+
+<h3>Recursos</h3>
+<div class="tablewrap"><table>
+<tr><th>Recurso</th><th>Dónde</th><th>Estado</th></tr>
+<tr><td>Figma</td><td>Design System Orali SIPA - 2026 · Buttons/Button</td><td><span class="pend inline">FALTA LINK AL NODO</span></td></tr>
+<tr><td>Tokens</td><td><code>tokens/component.json → button.*</code> · <code>dist/tokens.css</code></td><td class="ok">OK</td></tr>
+<tr><td>React</td><td><code>&lt;Button&gt;</code> / <code>buttonClasses()</code> del sitio</td><td><span class="pend inline">FALTA RUTA</span></td></tr>
+<tr><td>Storybook</td><td>Button / Hierarchies, Sizes, States</td><td><span class="pend inline">FASE 4</span></td></tr>
+</table></div>
+<div class="sb">Storybook pendiente: Button / Hierarchies, Sizes, States</div>
+</section>
+
+<!-- ============ USO ============ -->
+<section class="tab" id="t1"><h2 class="tabname">Pestaña: Uso</h2>
+<h3>Button o link</h3>
+<div class="tablewrap"><table>
+<tr><th>Elemento</th><th>Cuándo</th><th>Ejemplo</th></tr>
+<tr><td><code>&lt;button&gt;</code></td><td>Ejecuta una acción en la misma pantalla</td><td>Agregar, Aplicar cupón, abrir el carrito</td></tr>
+<tr><td><code>&lt;a href&gt;</code></td><td>Lleva a otra URL, aunque se vea como botón</td><td>«Ver productos» en un hero, «Ver todos»</td></tr>
+</table></div>
+<p>La jerarquía <strong>Link</strong> es solo visual: el elemento depende de lo que hace.</p>
+
+<h3>Jerarquías</h3>
+<p class="hint">«Cuándo» sale de <code>05-button.md</code>. Lo marcado <span class="pend inline">PROPUESTA</span> es nuevo y espera tu OK.</p>
+<div class="hiercards">
+  <figure class="imgreal"><div class="stage"><button class="btn" data-h="primary" data-size="lg"><span>Ver todos los productos</span></button></div><figcaption><b>Primary</b>Acción principal de una sección. Una por bloque. Tamaño habitual: lg.<span class="no">No usar <span class="pend inline">PROPUESTA</span></span><ul><li>Dos en el mismo bloque.</li><li>Para cancelar o volver: va Neutral.</li></ul></figcaption></figure>
+  <figure class="imgreal"><div class="stage"><button class="btn" data-h="add-to-cart"><svg aria-hidden="true"><use href="#i-plus"/></svg><span>Agregar</span></button></div><figcaption><b>Add to cart</b>Agregar desde card o PDP. Al agregar lo reemplaza el Stepper. md. Comparte slot y forma con Stepper.<span class="no">No usar</span><ul><li>Cambiar su radius sin cambiar el del Stepper.</li><li>Pill.</li></ul></figcaption></figure>
+  <figure class="imgreal"><div class="stage"><button class="btn" data-h="secondary"><span>Continuar en checkout</span></button></div><figcaption><b>Secondary</b>Acción secundaria oscura: aplicar cupón, continuar en checkout.<span class="no">No usar <span class="pend inline">PROPUESTA</span></span><ul><li>Al lado de un Primary: compiten en peso.</li></ul></figcaption></figure>
+  <figure class="imgreal"><div class="stage"><button class="btn" data-h="outline" data-size="lg"><span>Ingresar</span></button></div><figcaption><b>Outline</b>Acción de cuenta o alternativa. lg.<span class="no">No usar <span class="pend inline">PROPUESTA</span></span><ul><li>Para cancelar: el rojo sugiere avanzar. Va Neutral.</li></ul></figcaption></figure>
+  <figure class="imgreal"><div class="stage"><button class="btn" data-h="neutral"><span>Cancelar</span></button></div><figcaption><b>Neutral</b>Acción terciaria sobre superficie clara: cancelar, ver más.<span class="no">No usar <span class="pend inline">PROPUESTA</span></span><ul><li>Para el paso que hace avanzar el flujo.</li><li>Sobre fotos: va Inverse.</li></ul></figcaption></figure>
+  <figure class="imgreal"><div class="stage dark"><button class="btn" data-h="inverse"><span>Ver productos</span></button></div><figcaption><b>Inverse</b>Botón blanco sobre foto (banners). Siempre pill.<span class="no">No usar <span class="pend inline">PROPUESTA</span></span><ul><li>Sobre superficie clara.</li></ul></figcaption></figure>
+  <figure class="imgreal"><div class="stage"><button class="btn" data-h="link"><span>Ver detalle</span></button></div><figcaption><b>Link</b>Acción con peso de texto, sin fondo ni padding-x: ver detalle, editar dirección.<span class="no">No usar <span class="pend inline">PROPUESTA</span></span><ul><li>Como única acción de un paso de checkout.</li></ul></figcaption></figure>
+</div>
+<div class="pend"><b>PENDIENTE:</b> Ghost y Destructive existen en Figma, pero no tienen uso definido ni están en el sitio. Ver Revisión.</div>
+
+<h3>Forma: compra o marketing</h3>
+<figure class="imgreal"><div class="stage row">
+  <button class="btn" data-h="primary" data-size="lg"><span>Finalizar compra</span></button>
+  <button class="btn" data-h="primary" data-size="lg" data-shape="pill"><span>Suscribirme</span></button>
+</div><figcaption>Izquierda: <code>button.shape.default</code> → 8px (compra, formularios, Stepper). Derecha: <code>button.shape.pill</code> → full (hero, banners, newsletter, filtros).</figcaption></figure>
+<div class="desf"><b>DESFASE:</b> Figma no tiene propiedad de forma: todos los botones se ven con radio por defecto.</div>
+
+<h3>Grupos y layout <span class="pend inline">PROPUESTA</span></h3>
+<figure class="imgreal"><div class="stage col">
+  <div style="display:flex;gap:var(--space-2)"><button class="btn" data-h="neutral"><span>Cancelar</span></button><button class="btn" data-h="primary"><span>Guardar dirección</span></button></div>
+  <div style="display:flex;flex-direction:column;gap:var(--space-2);width:280px"><button class="btn" data-h="primary" data-size="lg"><span>Continuar con el pago</span></button><button class="btn" data-h="link" style="align-self:center"><span>Seguir comprando</span></button></div>
+</div><figcaption>Arriba: modal o drawer, alineado a la derecha con Primary a la derecha. Abajo: mobile, apilado con Primary arriba. Gap <code>space.2</code> (8px).</figcaption></figure>
+<ul><li>Un solo botón de mayor peso por grupo.</li><li>No agrupar dos Primary, ni Secondary con Primary.</li><li>Separación entre grupos distintos: <code>space.8</code> (32px).</li></ul>
+
+<h3>Do y Don't</h3>
+<ul class="rules"><span class="tag">Do / Don't</span>
+<li class="do"><span class="badge">Hacer</span>Un solo Primary por sección visible</li>
+<li class="do"><span class="badge">Hacer</span>Labels de 1–2 palabras en infinitivo o imperativo: «Agregar», «Ver productos»</li>
+<li class="do"><span class="badge">Hacer</span><span>Agregar «…» cuando la acción abre otro paso («Compartir…») <span class="pend inline">PROPUESTA</span></span></li>
+<li class="dont"><span class="badge">No hacer</span>Usar sage como fondo de un CTA de compra</li>
+<li class="dont"><span class="badge">No hacer</span>Usar pill en acciones de compra o de formulario</li>
+<li class="dont"><span class="badge">No hacer</span>Mezclar pill y default en una misma pantalla de compra</li>
+<li class="dont"><span class="badge">No hacer</span>Usar el rojo tomato para una acción destructiva sin pasar por la jerarquía Destructive</li>
+<li class="dont"><span class="badge">No hacer</span>Labels vagos: «Click acá», «Más»</li>
+</ul>
+</section>
+
+<!-- ============ VARIANTES Y ESTADOS ============ -->
+<section class="tab" id="t2"><h2 class="tabname">Pestaña: Variantes y estados</h2>
+<h3>Matriz de estados</h3>
+<figure class="imgreal"><div class="stage scroll"><div id="matrix" class="matrix"></div></div><figcaption>Estados forzados con clases para mostrarlos fijos. Los botones también responden al hover, al foco con Tab y al click.</figcaption></figure>
+<div class="tablewrap"><table>
+<tr><th>Estado</th><th>En Figma</th><th>Spec</th></tr>
+<tr><td>Default</td><td>Sí</td><td>Según jerarquía</td></tr>
+<tr><td>Hover</td><td>Sí</td><td><code>button.{hierarchy}.bg-hover</code>. Link: <code>fg-hover</code> + subrayado. Transición <code>motion.transition.fast</code></td></tr>
+<tr><td>Active</td><td><b>No</b></td><td><code>button.{hierarchy}.bg-active</code>. Si abre un menú, queda active mientras está abierto <span class="pend inline">PROPUESTA</span></td></tr>
+<tr><td>Focus</td><td>Sí</td><td>Anillo <code>button.focus-ring</code> 2px, offset 2px, solo <code>:focus-visible</code></td></tr>
+<tr><td>Disabled</td><td>Sí</td><td>Set compartido <code>button.disabled.*</code>. Link: solo el texto. Sin opacidad</td></tr>
+<tr><td>Loading</td><td><b>No</b></td><td>El spinner reemplaza al label y el botón mantiene el ancho. <code>aria-busy="true"</code>, sin doble click</td></tr>
+</table></div>
+
+<h3>Tamaños</h3>
+<figure class="imgreal"><div class="stage row">
+  <button class="btn" data-h="primary" data-size="sm"><span>sm</span></button>
+  <button class="btn" data-h="primary" data-size="md"><span>md</span></button>
+  <button class="btn" data-h="primary" data-size="lg"><span>lg</span></button>
+  <button class="btn" data-h="primary" data-size="xl"><span>xl</span></button>
+</div><figcaption>Alto = interlineado + padding-y × 2. <code>height</code> se aplica como <code>min-height</code>.</figcaption></figure>
+<div class="tablewrap"><table id="sizes"></table></div>
+<p class="hint">Valores leídos en vivo de <code>dist/tokens.css</code>.</p>
+
+<h3>Íconos</h3>
+<figure class="imgreal"><div class="stage row">
+  <button class="btn" data-h="primary"><span>Sin ícono</span></button>
+  <button class="btn" data-h="primary"><svg aria-hidden="true"><use href="#i-cart"/></svg><span>Leading</span></button>
+  <button class="btn" data-h="primary"><span>Trailing</span><svg aria-hidden="true"><use href="#i-arrow"/></svg></button>
+  <button class="btn" data-h="primary" data-icon-only aria-label="Agregar al carrito"><svg aria-hidden="true"><use href="#i-cart"/></svg></button>
+</div><figcaption>Sin ícono · leading · trailing · icon-only (con <code>aria-label</code>)</figcaption></figure>
+
+<h3>Loading</h3>
+<figure class="imgreal"><div class="stage row">
+  <button class="btn is-loading" data-h="primary" aria-busy="true" aria-disabled="true"><span>Finalizar compra</span></button>
+  <button class="btn is-loading" data-h="secondary" aria-busy="true" aria-disabled="true"><span>Aplicar cupón</span></button>
+  <button class="btn is-loading" data-h="neutral" aria-busy="true" aria-disabled="true"><span>Cancelar</span></button>
+</div><figcaption>Mantiene el color de su jerarquía y el ancho del label</figcaption></figure>
+<div class="pend"><b>PENDIENTE:</b> Loading figura en los docs del repo, no en Figma.</div>
+
+<h3>Tokens por jerarquía</h3>
+<div id="htokens"></div>
+</section>
+
+<!-- ============ ACCESIBILIDAD ============ -->
+<section class="tab" id="t3"><h2 class="tabname">Pestaña: Accesibilidad</h2>
+<h3>Rol y estructura</h3>
+<ul><li>Si ejecuta una acción es <code>&lt;button&gt;</code>. Si navega es <code>&lt;a&gt;</code>, también con estilo Link.</li><li>Los botones de ícono requieren <code>aria-label</code>. Tooltip con el mismo texto <span class="pend inline">PROPUESTA</span></li><li>Deshabilitado: <code>aria-disabled="true"</code>, sin hover. Preferirlo a <code>disabled</code> cuando el usuario tiene que poder enfocarlo para saber por qué no está disponible <span class="pend inline">PROPUESTA</span></li><li>Loading: <code>aria-busy="true"</code>. El label sigue en el DOM.</li><li>Abre menú o popover: <code>aria-expanded</code> + <code>aria-controls</code>.</li></ul>
+
+<h3>Teclado</h3>
+<div class="tablewrap"><table><tr><th>Tecla</th><th>Acción</th></tr>
+<tr><td><code>Tab</code> / <code>Shift+Tab</code></td><td>Mueve el foco. Orden natural, sin <code>tabindex</code> positivo</td></tr>
+<tr><td><code>Enter</code> / <code>Espacio</code></td><td>Activa <code>&lt;button&gt;</code>. Un <code>&lt;a&gt;</code> solo responde a Enter</td></tr></table></div>
+<div class="pend"><b>PENDIENTE:</b> confirmar que el sitio implementa estas teclas (es el comportamiento nativo de <code>&lt;button&gt;</code>).</div>
+
+<h3>Contraste</h3>
+<p class="hint">Calculado en vivo sobre los botones dibujados con <code>dist/tokens.css</code>.</p>
+<div class="tablewrap"><table id="contrast"></table></div>
+<p class="hint">Texto: 4.5:1 (WCAG 1.4.3). Los deshabilitados están exentos, pero el label tiene que seguir siendo legible. El borde se mide contra la superficie solo como referencia (1.4.11): el label ya identifica el botón.</p>
+
+<h3>Foco</h3>
+<figure class="imgreal"><div class="stage row">
+  <button class="btn is-focus" data-h="primary"><span>Primary</span></button>
+  <button class="btn is-focus" data-h="neutral"><span>Neutral</span></button>
+  <button class="btn is-focus" data-h="link"><span>Link</span></button>
+</div><div class="stage row dark"><button class="btn is-focus" data-h="inverse"><span>Inverse</span></button></div>
+<figcaption>Anillo <code>button.focus-ring</code> 2px, offset 2px. Sobre foto u oscuro: <code>color.focus-ring.inverse</code>. Los campos de formulario usan 1px y recolorean el borde.</figcaption></figure>
+
+<h3>Tamaño del target</h3>
+<figure class="imgreal"><div class="stage row">
+  <span class="hitbox"><button class="btn" data-h="primary" data-size="sm"><span>sm 36</span></button></span>
+  <span class="hitbox"><button class="btn" data-h="primary" data-size="md"><span>md 40</span></button></span>
+  <span class="hitbox"><button class="btn" data-h="primary" data-size="lg"><span>lg 44</span></button></span>
+  <span class="hitbox"><button class="btn" data-h="primary" data-size="xl"><span>xl 48</span></button></span>
+</div><figcaption>La línea punteada marca 44px</figcaption></figure>
+<ul><li>lg y xl cumplen 44px.</li><li>sm y md: solo en desktop o a ancho completo (Add to cart en card).</li></ul>
+<div class="pend"><b>DECISIÓN:</b> la alternativa es darle a sm y md un área clickeable de 44px con un pseudo-elemento, sin cambiar el visual.</div>
+</section>
+
+<!-- ============ CÓDIGO ============ -->
+<section class="tab" id="t4"><h2 class="tabname">Pestaña: Código</h2>
+<div class="pend"><b>PENDIENTE:</b> verificar esta API contra el componente React del sitio. Sale de los ejes de Figma y de lo que menciona <code>05-button.md</code> (<code>shape</code>, <code>buttonClasses()</code>).</div>
+<h3>Props</h3>
+<div class="tablewrap"><table>
+<tr><th>Prop</th><th>Tipo</th><th>Default</th><th>Figma</th></tr>
+<tr><td><code>hierarchy</code></td><td><code>'primary' | 'add-to-cart' | 'secondary' | 'outline' | 'neutral' | 'inverse' | 'link'</code></td><td><code>'primary'</code></td><td>Hierarchy</td></tr>
+<tr><td><code>size</code></td><td><code>'sm' | 'md' | 'lg' | 'xl'</code></td><td><code>'md'</code></td><td>Size</td></tr>
+<tr><td><code>shape</code></td><td><code>'default' | 'pill'</code></td><td><code>'default'</code> (inverse: <code>'pill'</code>)</td><td>— (no existe)</td></tr>
+<tr><td><code>disabled</code></td><td><code>boolean</code></td><td><code>false</code></td><td>State = Disabled</td></tr>
+<tr><td><code>loading</code></td><td><code>boolean</code></td><td><code>false</code></td><td>— (no existe)</td></tr>
+<tr><td><code>iconLeft</code> / <code>iconRight</code></td><td><code>ReactNode</code></td><td>—</td><td>Icon</td></tr>
+<tr><td><code>asChild</code> / <code>href</code></td><td>—</td><td>—</td><td>Renderiza <code>&lt;a&gt;</code> cuando navega</td></tr>
+</table></div>
+<p class="hint">Hover, active y focus los resuelve CSS. En Figma son variantes de State.</p>
+<h3>Uso</h3>
+<pre class="codeblock"><code>&lt;Button hierarchy="add-to-cart" iconLeft={&lt;PlusIcon /&gt;}&gt;Agregar&lt;/Button&gt;
+
+&lt;Button hierarchy="primary" size="lg" shape="pill" asChild&gt;
+  &lt;a href="/productos"&gt;Ver productos&lt;/a&gt;
+&lt;/Button&gt;
+
+&lt;Button hierarchy="primary" size="lg" loading&gt;Finalizar compra&lt;/Button&gt;</code></pre>
+<h3>CSS de referencia</h3>
+<p class="hint">Es el CSS que dibuja esta página: solo usa tokens, sin valores fijos.</p>
+<pre class="codeblock"><code id="csssrc"></code></pre>
+<h3>Changelog</h3>
+<div class="tablewrap"><table><tr><th>Versión</th><th>Cambio</th></tr><tr><td>—</td><td>Primera versión HTML, desde <code>05-button.md</code> + <code>comp-button.html</code>. Pendiente de validar.</td></tr></table></div>
+</section>
+
+<!-- ============ REVISIÓN ============ -->
+<section class="tab" id="t5"><h2 class="tabname">Pestaña: Revisión (no se migra)</h2>
+<h3>Desfases entre doc, tokens y Figma</h3>
+<div class="tablewrap"><table id="drift"></table></div>
+
+<h3>Jerarquías fuera del sitio</h3>
+<figure class="imgreal"><div class="stage row">
+  <button class="btn" data-h="ghost"><span>Ghost</span></button>
+  <button class="btn is-hover" data-h="ghost"><span>Ghost hover</span></button>
+  <button class="btn is-disabled" data-h="ghost" aria-disabled="true"><span>Ghost disabled</span></button>
+  <span class="btn" style="--bg:var(--color-action-destructive-bg);--fg:var(--color-action-destructive-fg);--fw:var(--font-weight-semibold);--r:var(--button-shape-default);cursor:default">Vaciar carrito</span>
+</div><figcaption>Ghost con <code>button.ghost.*</code>. Destructive armado directo con <code>color.action.destructive.*</code>, porque no existe <code>button.destructive.*</code>.</figcaption></figure>
+<ul>
+<li><b>Ghost</b>: existe en Figma y en tokens, pero no en la doc ni en el sitio.</li>
+<li><b>Destructive</b>: existe en Figma y en semantic («eliminar, vaciar carrito»), pero no hay tokens de componente.</li>
+<li><b>Add to cart</b> e <b>Inverse</b>: están en tokens y en la doc, pero <b>no en la captura de Figma</b>.</li>
+</ul>
+
+<h3>Decisiones pendientes</h3>
+<div class="tablewrap"><table>
+<tr><th>#</th><th>Decisión</th><th>Recomendación</th><th>Trade-off</th></tr>
+<tr><td>1</td><td>Medidas por jerarquía (<code>button.primary.height|padding-*</code>…)</td><td>Deprecar y borrar en un minor después de verificar que el sitio no las usa</td><td>Si el sitio las consume, se rompe. Primero buscar <code>--button-primary-height</code> en el sitio</td></tr>
+<tr><td>2</td><td>Ghost</td><td>Documentarlo como jerarquía: ya existe en Figma y en tokens</td><td>Se superpone con Link. Hay que definir cuándo uno y cuándo el otro</td></tr>
+<tr><td>3</td><td>Destructive</td><td>Agregar <code>button.destructive.*</code> aliasando el semantic</td><td>Son tokens nuevos: un minor y cambios en <code>dist/</code></td></tr>
+<tr><td>4</td><td>Add to cart e Inverse en Figma</td><td>Agregarlos como valores de Hierarchy</td><td>Sin eso, Code Connect no mapea 1:1</td></tr>
+<tr><td>5</td><td>Active, Loading y Shape en Figma</td><td>Agregar State=Active, State=Loading y una propiedad Shape</td><td>Más variantes en el component set</td></tr>
+<tr><td>6</td><td>Target de sm/md</td><td>Área clickeable de 44px con pseudo-elemento</td><td>Puede solaparse en grillas densas</td></tr>
+<tr><td>7</td><td>Orden de los grupos</td><td>Primary a la derecha en modal/drawer y arriba en apilado</td><td>Hitachi lo pone a la izquierda. Lo importante es que sea igual en todo el sitio</td></tr>
+<tr><td>8</td><td><code>button.disabled.opacity</code></td><td>Borrar</td><td>Ninguno si no hay consumidores</td></tr>
+</table></div>
+</section>
+</main></div>
+
+<script>
+(function(){
+  const root=getComputedStyle(document.documentElement);
+  const v=n=>root.getPropertyValue(n).trim();
+  if(!v('--button-primary-bg')){document.getElementById('tokwarn').innerHTML='<div class="desf"><b>No se cargó dist/tokens.css: los botones se ven sin estilo.</b> Abrí este archivo desde <code>sytem-docs-orali/button.html</code>. La vista previa del chat no ve <code>dist/</code>.</div>'}
+  const probe=document.createElement('span');probe.style.display='none';document.body.appendChild(probe);
+  const colorOf=n=>{probe.style.color='';probe.style.color=`var(${n})`;return getComputedStyle(probe).color};
+  const rgb=s=>{const m=s.match(/[\d.]+/g);return m?m.slice(0,4).map(Number):null};
+  const hex=s=>{const c=rgb(s);if(!c)return s;if(c.length===4&&c[3]===0)return 'transparent';return '#'+c.slice(0,3).map(x=>Math.round(x).toString(16).padStart(2,'0')).join('').toUpperCase()};
+  const lum=c=>{const a=c.slice(0,3).map(x=>{x/=255;return x<=.03928?x/12.92:Math.pow((x+.055)/1.055,2.4)});return .2126*a[0]+.7152*a[1]+.0722*a[2]};
+  const ratio=(a,b)=>{const A=lum(a),B=lum(b);return (Math.max(A,B)+.05)/(Math.min(A,B)+.05)};
+  const blend=(f,b)=>(f.length<4||f[3]===1)?f:[0,1,2].map(i=>f[i]*f[3]+b[i]*(1-f[3]));
+  const isColor=n=>/(bg|fg|border|ring)(-|$)/.test(n.replace('--',''));
+  const valCell=n=>{const raw=v(n);if(!raw)return '<span class="bad">no existe</span>';if(isColor(n)){const c=colorOf(n);return `<span class="sw" style="background:${c}"></span>${hex(c)}`}return raw};
+
+  // Matriz
+  const H=['primary','add-to-cart','secondary','outline','neutral','inverse','link'];
+  const S=[['default',''],['hover','is-hover'],['active','is-active'],['focus','is-focus'],['disabled','is-disabled'],['loading','is-loading']];
+  const L={primary:'Comprar','add-to-cart':'Agregar',secondary:'Aplicar',outline:'Ingresar',neutral:'Cancelar',inverse:'Ver más',link:'Ver detalle'};
+  let m='<div></div>'+S.map(s=>`<div class="hd">${s[0]}</div>`).join('');
+  H.forEach(h=>{m+=`<div class="rl">${h}</div>`;S.forEach(([n,c])=>{const a=c==='is-disabled'?' aria-disabled="true"':c==='is-loading'?' aria-busy="true" aria-disabled="true"':'';m+=`<div class="cell${h==='inverse'?' dark':''}"><button class="btn ${c}" data-h="${h}" data-size="sm"${a} tabindex="-1"><span>${L[h]}</span></button></div>`})});
+  document.getElementById('matrix').innerHTML=m;
+
+  // Tamaños
+  const P=['height','padding-y','padding-x','gap','font-size','line-height','icon-size'];
+  let st='<tr><th>Size</th>'+P.map(p=>`<th>${p}</th>`).join('')+'</tr>';
+  ['sm','md','lg','xl'].forEach(s=>{st+=`<tr><td><strong>${s}</strong></td>`+P.map(p=>`<td>${v(`--button-size-${s}-${p}`)||'—'}</td>`).join('')+'</tr>'});
+  document.getElementById('sizes').innerHTML=st;
+
+  // Tokens por jerarquía
+  const tk={primary:['bg','bg-hover','bg-active','fg','radius','font-weight'],'add-to-cart':['bg','bg-hover','bg-active','fg','radius','font-weight'],secondary:['bg','bg-hover','bg-active','fg','radius','font-weight'],outline:['bg','bg-hover','bg-active','fg','fg-hover','fg-active','border','radius','font-weight'],neutral:['bg','bg-hover','bg-active','fg','border','radius','font-weight'],inverse:['bg','bg-hover','bg-active','fg','radius','font-weight'],link:['fg','fg-hover','fg-active','font-weight','padding-x','text-decoration','text-decoration-hover']};
+  let ht='';
+  Object.entries(tk).forEach(([h,list])=>{ht+=`<h4>${h}</h4><div class="tablewrap"><table><tr><th>Token</th><th>CSS</th><th>Valor</th></tr>`+list.map(p=>{const n=`--button-${h}-${p}`;return `<tr><td><code>button.${h}.${p}</code></td><td><code>var(${n})</code></td><td>${valCell(n)}</td></tr>`}).join('')+'</table></div>'});
+  const shared=[['button.shape.default','--button-shape-default'],['button.shape.pill','--button-shape-pill'],['button.focus-ring','--button-focus-ring'],['button.focus-width','--button-focus-width'],['button.focus-offset','--button-focus-offset'],['button.disabled.bg','--button-disabled-bg'],['button.disabled.fg','--button-disabled-fg'],['button.disabled.border','--button-disabled-border'],['button.disabled.link-fg','--button-disabled-link-fg'],['motion.transition.fast','--motion-transition-fast']];
+  ht+='<h4>Compartidos</h4><div class="tablewrap"><table><tr><th>Token</th><th>CSS</th><th>Valor</th></tr>'+shared.map(([t,n])=>`<tr><td><code>${t}</code></td><td><code>var(${n})</code></td><td>${valCell(n)}</td></tr>`).join('')+'</table></div>';
+  document.getElementById('htokens').innerHTML=ht;
+
+  // Contraste
+  const surf=rgb(colorOf('--color-surface-default'))||[255,255,255],dark=rgb(colorOf('--color-surface-inverse'))||[26,26,26];
+  const host=document.createElement('div');host.style.cssText='position:absolute;left:-9999px';document.body.appendChild(host);
+  let ct='<tr><th>Jerarquía</th><th>Estado</th><th>Texto</th><th>Fondo</th><th>Ratio</th><th>AA</th></tr>';
+  H.forEach(h=>['','is-hover','is-active','is-disabled'].forEach(c=>{
+    const b=document.createElement('button');b.className='btn '+c;b.dataset.h=h;b.textContent='Aa';host.appendChild(b);
+    const cs=getComputedStyle(b);let bg=rgb(cs.backgroundColor);const under=h==='inverse'?dark:surf;
+    bg=(bg.length===4&&bg[3]===0)?under:blend(bg,under);const fg=blend(rgb(cs.color),bg);const r=ratio(fg,bg);
+    ct+=`<tr><td>${h}</td><td>${c.replace('is-','')||'default'}</td><td><span class="sw" style="background:rgb(${fg})"></span>${hex('rgb('+fg+')')}</td><td><span class="sw" style="background:rgb(${bg})"></span>${hex('rgb('+bg+')')}</td><td>${r.toFixed(2)}:1</td><td>${c==='is-disabled'?'<span class="hint">exento</span>':r>=4.5?'<span class="ok">✓</span>':'<span class="bad">✗</span>'}</td></tr>`;b.remove()}));
+  [['outline','--button-outline-border'],['neutral','--button-neutral-border']].forEach(([h,n])=>{const r=ratio(rgb(colorOf(n)),surf);ct+=`<tr><td>${h}</td><td>borde vs superficie</td><td><span class="sw" style="background:${colorOf(n)}"></span>${hex(colorOf(n))}</td><td>${hex('rgb('+surf+')')}</td><td>${r.toFixed(2)}:1</td><td>${r>=3?'<span class="ok">✓ 3:1</span>':'<span class="hint">&lt; 3:1 (ref.)</span>'}</td></tr>`});
+  document.getElementById('contrast').innerHTML=ct;
+
+  // Desfases
+  const drift=[['Neutral · fondo','05-button.md: white','--button-neutral-bg'],['Disabled · texto e ícono','05-button.md: neutral.400','--button-disabled-fg'],['Disabled · borde','05-button.md: neutral.200','--button-disabled-border'],['Disabled · opacidad','05-button.md: «No usar opacidad»','--button-disabled-opacity'],['Medidas por jerarquía','05-button.md: «Ningún token de jerarquía define medidas»','--button-primary-padding-x'],['Primary vs size.lg · padding-x','Deberían coincidir','--button-size-lg-padding-x']];
+  let dt='<tr><th>Qué</th><th>Fuente dice</th><th>dist/ tiene</th><th>Valor</th></tr>';
+  drift.forEach(([q,d,n])=>{dt+=`<tr><td>${q}</td><td>${d}</td><td><code>${n}</code></td><td>${valCell(n)}</td></tr>`});
+  document.getElementById('drift').innerHTML=dt;
+
+  // CSS fuente
+  const css=[...document.querySelectorAll('style')].map(s=>s.textContent).join('');
+  document.getElementById('csssrc').textContent=css.slice(css.indexOf('/* ===== Componente Button')).trim();
+
+  // Tabbar activa al scrollear
+  const links=[...document.querySelectorAll('.tabbar a')];
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)links.forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+e.target.id))}),{rootMargin:'-80px 0px -70% 0px'});
+  document.querySelectorAll('section.tab').forEach(s=>io.observe(s));
+})();
+</script>
+</body></html>

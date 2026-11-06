@@ -1,0 +1,190 @@
+From ab605a93d4f41ba1bf49a7ab816b02a29767d47c Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Emiliano=20Rom=C3=A1n?= <emiliano.roman@gmail.com>
+Date: Wed, 4 Nov 2026 13:20:02 +0000
+Subject: [PATCH] feat(form): foco de campos en neutral.900 y 2px
+
+color.form.border-focus: tomato.500 -> neutral.900 (foco y error dejan de compartir rojo).
+border-width.focus: 1px -> 2px (afecta select.focus-width).
+Consumidores: input.form, input.pill, select.
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_013i2sRe2vU3Zoymte874HXD
+---
+ CHANGELOG.md          |  2 ++
+ dist/tokens.css       | 12 ++++++------
+ dist/tokens.json      | 12 ++++++------
+ tokens/primitive.json |  4 ++--
+ tokens/semantic.json  |  3 ++-
+ 5 files changed, 18 insertions(+), 15 deletions(-)
+ mode change 100644 => 100755 CHANGELOG.md
+ mode change 100644 => 100755 dist/tokens.css
+ mode change 100644 => 100755 dist/tokens.json
+ mode change 100644 => 100755 tokens/primitive.json
+ mode change 100644 => 100755 tokens/semantic.json
+
+diff --git a/CHANGELOG.md b/CHANGELOG.md
+old mode 100644
+new mode 100755
+index ff87df5..3721d8f
+--- a/CHANGELOG.md
++++ b/CHANGELOG.md
+@@ -17,6 +17,8 @@
+ - `badge.discount.padding-y` 2 → 6px (`space.1-5`)
+ - `button.outline.bg` → `{color.action.outline.bg}` (blanco)
+ - Semántico: `color.action.destructive.{bg,bg-hover,bg-active,fg}` → red.600 / 700 / 800 y blanco. Ya existía en Figma; ahora el repo es la fuente. Texto blanco: 4.83 / 6.47 / 8.31:1 (AA)
++- `color.form.border-focus` → neutral.900 (antes tomato.500). Foco y error ya no comparten rojo: el rojo queda solo para error. 17.4:1 sobre blanco
++- `border-width.focus` 1 → 2px. Afecta a `select.focus-width`. En el sitio se dibuja con `box-shadow: inset` para no mover el layout
+ 
+ ## 3.0.0
+ 
+diff --git a/dist/tokens.css b/dist/tokens.css
+old mode 100644
+new mode 100755
+index ac2955b..b57cfe1
+--- a/dist/tokens.css
++++ b/dist/tokens.css
+@@ -155,7 +155,7 @@
+   --border-width-sm: 1px;
+   --border-width-md: 1.5px;
+   --border-width-lg: 2px;
+-  --border-width-focus: 1px; /** Campos: el borde cambia de color, sin línea extra */
++  --border-width-focus: 2px; /** Campos: borde de 2px en foco (box-shadow inset para no mover el layout) */
+   --shadow-sm: 0px 1px 2px 0px rgba(0, 0, 0, 0.05);
+   --shadow-md: 0px 1px 3px 0px rgba(0, 0, 0, 0.1), 0px 1px 2px -1px rgba(0, 0, 0, 0.1);
+   --shadow-lg: 0px 10px 15px -3px rgba(0, 0, 0, 0.1), 0px 4px 6px -4px rgba(0, 0, 0, 0.1);
+@@ -265,7 +265,7 @@
+   --color-form-border-hover: var(--color-neutral-600);
+   --color-form-control-off: var(--color-neutral-400); /** Track de toggle apagado: 3.28:1 */
+   --color-form-control-off-hover: var(--color-neutral-500);
+-  --color-form-border-focus: var(--color-tomato-500);
++  --color-form-border-focus: var(--color-neutral-900); /** Foco de campos: 2px (border-width.focus) en neutral.900. El rojo queda solo para error */
+   --color-form-border-error: var(--color-red-600);
+   --color-form-bg-error: var(--color-red-50);
+   --color-form-bg-disabled: var(--color-neutral-100);
+@@ -740,7 +740,7 @@
+   --color-form-border-hover-rgb: 82 82 82;
+   --color-form-control-off-rgb: 142 142 142;
+   --color-form-control-off-hover-rgb: 107 107 107;
+-  --color-form-border-focus-rgb: 227 6 19;
++  --color-form-border-focus-rgb: 26 26 26;
+   --color-form-border-error-rgb: 220 38 38;
+   --color-form-bg-error-rgb: 254 242 242;
+   --color-form-bg-disabled-rgb: 245 245 245;
+@@ -814,11 +814,11 @@
+   --input-form-bg-rgb: 255 255 255;
+   --input-form-fg-rgb: 26 26 26;
+   --input-form-border-rgb: 142 142 142;
+-  --input-form-border-focus-rgb: 227 6 19;
++  --input-form-border-focus-rgb: 26 26 26;
+   --input-pill-bg-rgb: 255 255 255;
+   --input-pill-fg-rgb: 26 26 26;
+   --input-pill-border-rgb: 142 142 142;
+-  --input-pill-border-focus-rgb: 227 6 19;
++  --input-pill-border-focus-rgb: 26 26 26;
+   --badge-discount-bg-rgb: 255 255 255;
+   --badge-discount-fg-rgb: 227 6 19;
+   --badge-discount-border-rgb: 227 6 19;
+@@ -833,7 +833,7 @@
+   --select-bg-disabled-rgb: 245 245 245;
+   --select-border-rgb: 142 142 142;
+   --select-border-hover-rgb: 82 82 82;
+-  --select-border-focus-rgb: 227 6 19;
++  --select-border-focus-rgb: 26 26 26;
+   --select-border-error-rgb: 220 38 38;
+   --select-border-disabled-rgb: 212 212 212;
+   --select-label-rgb: 26 26 26;
+diff --git a/dist/tokens.json b/dist/tokens.json
+old mode 100644
+new mode 100755
+index 2406d48..9958fb0
+--- a/dist/tokens.json
++++ b/dist/tokens.json
+@@ -173,7 +173,7 @@
+   "ColorFormBorderHover": "#525252",
+   "ColorFormControlOff": "#8e8e8e",
+   "ColorFormControlOffHover": "#6b6b6b",
+-  "ColorFormBorderFocus": "#e30613",
++  "ColorFormBorderFocus": "#1a1a1a",
+   "ColorFormBorderError": "#dc2626",
+   "ColorFormBgError": "#fef2f2",
+   "ColorFormBgDisabled": "#f5f5f5",
+@@ -264,7 +264,7 @@
+   "BorderWidthSm": "1px",
+   "BorderWidthMd": "1.5px",
+   "BorderWidthLg": "2px",
+-  "BorderWidthFocus": "1px",
++  "BorderWidthFocus": "2px",
+   "ShadowSm": {"blur":"2px","spread":"0px","color":"rgba(0, 0, 0, 0.05)","offsetX":"0px","offsetY":"1px"},
+   "ShadowMd": [{"blur":"3px","spread":"0px","color":"rgba(0, 0, 0, 0.1)","offsetX":"0px","offsetY":"1px"},{"blur":"2px","spread":"-1px","color":"rgba(0, 0, 0, 0.1)","offsetX":"0px","offsetY":"1px"}],
+   "ShadowLg": [{"blur":"15px","spread":"-3px","color":"rgba(0, 0, 0, 0.1)","offsetX":"0px","offsetY":"10px"},{"blur":"6px","spread":"-4px","color":"rgba(0, 0, 0, 0.1)","offsetX":"0px","offsetY":"4px"}],
+@@ -438,14 +438,14 @@
+   "InputFormBg": "#ffffff",
+   "InputFormFg": "#1a1a1a",
+   "InputFormBorder": "#8e8e8e",
+-  "InputFormBorderFocus": "#e30613",
++  "InputFormBorderFocus": "#1a1a1a",
+   "InputFormRadius": "8px",
+   "InputFormHeight": "44px",
+   "InputFormPaddingX": "12px",
+   "InputPillBg": "#ffffff",
+   "InputPillFg": "#1a1a1a",
+   "InputPillBorder": "#8e8e8e",
+-  "InputPillBorderFocus": "#e30613",
++  "InputPillBorderFocus": "#1a1a1a",
+   "InputPillRadius": "9999px",
+   "InputPillHeight": "44px",
+   "InputPillPaddingX": "16px",
+@@ -479,7 +479,7 @@
+   "SelectBgDisabled": "#f5f5f5",
+   "SelectBorder": "#8e8e8e",
+   "SelectBorderHover": "#525252",
+-  "SelectBorderFocus": "#e30613",
++  "SelectBorderFocus": "#1a1a1a",
+   "SelectBorderError": "#dc2626",
+   "SelectBorderDisabled": "#d4d4d4",
+   "SelectLabel": "#1a1a1a",
+@@ -497,7 +497,7 @@
+   "SelectPaddingX": "12px",
+   "SelectGap": "8px",
+   "SelectIconSize": "20px",
+-  "SelectFocusWidth": "1px",
++  "SelectFocusWidth": "2px",
+   "SelectMenuBg": "#ffffff",
+   "SelectMenuBorder": "#e4e4e4",
+   "SelectMenuRadius": "8px",
+diff --git a/tokens/primitive.json b/tokens/primitive.json
+old mode 100644
+new mode 100755
+index 835d8ce..6463bf0
+--- a/tokens/primitive.json
++++ b/tokens/primitive.json
+@@ -665,8 +665,8 @@
+     },
+     "focus": {
+       "$type": "dimension",
+-      "$value": "1px",
+-      "$description": "Campos: el borde cambia de color, sin línea extra"
++      "$value": "2px",
++      "$description": "Campos: borde de 2px en foco (box-shadow inset para no mover el layout)"
+     }
+   },
+   "shadow": {
+diff --git a/tokens/semantic.json b/tokens/semantic.json
+old mode 100644
+new mode 100755
+index 156dd45..95683d0
+--- a/tokens/semantic.json
++++ b/tokens/semantic.json
+@@ -430,7 +430,8 @@
+       },
+       "border-focus": {
+         "$type": "color",
+-        "$value": "{color.tomato.500}"
++        "$value": "{color.neutral.900}",
++        "$description": "Foco de campos: 2px (border-width.focus) en neutral.900. El rojo queda solo para error"
+       },
+       "border-error": {
+         "$type": "color",
+-- 
+2.34.1
+
