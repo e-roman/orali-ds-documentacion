@@ -1,6 +1,8 @@
 import type { ReactElement } from "react"
 import { notFound } from "next/navigation"
 import Sidebar from "@/components/sidebar"
+import { DocLinks } from "@/components/component-page"
+import { SB, TOKENS_REPO } from "@/lib/storybook"
 import { foundations } from "@/lib/nav"
 import {
   BorderView, ColorView, ElevationView, IconographyView, LayerView, MotionView, RadiusView, SpacingView, TokensView, TypographyView,
@@ -34,6 +36,7 @@ export default function Page({ params }: { params: { slug: string } }) {
         <article>
           <h1 className="doc-h1">{item.title}</h1>
           <p className="lead">{item.description}</p>
+          <DocLinks github={TOKENS_REPO} storybook={SB} />
           <View />
         </article>
       </main>

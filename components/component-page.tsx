@@ -2,15 +2,22 @@ import type { ReactNode } from "react"
 import DocTabs from "./doc-tabs"
 import { REPO, SB } from "@/lib/storybook"
 
+/** Links externos bajo el título: GitHub y Storybook. */
+export function DocLinks({ github, storybook }: { github: string; storybook: string }) {
+  return (
+    <ul className="doc-links" aria-label="Enlaces externos">
+      <li><a href={github} target="_blank" rel="noopener noreferrer"><img src="/github.svg" alt="" width={16} height={16} />GitHub</a></li>
+      <li><a href={storybook} target="_blank" rel="noopener noreferrer"><img src="/storybook.svg" alt="" width={16} height={16} />Storybook</a></li>
+    </ul>
+  )
+}
+
 export default function ComponentPage({ title, intro, panels, storybookHref = SB, githubHref = REPO }: { title: string; intro: string; panels: Parameters<typeof DocTabs>[0]["panels"]; storybookHref?: string; githubHref?: string }) {
   return (
     <article>
       <h1 className="doc-h1">{title}</h1>
       <p className="lead">{intro}</p>
-      <ul className="doc-links" aria-label="Enlaces externos">
-        <li><a href={githubHref} target="_blank" rel="noopener noreferrer"><img src="/github.svg" alt="" width={16} height={16} />GitHub</a></li>
-        <li><a href={storybookHref} target="_blank" rel="noopener noreferrer"><img src="/storybook.svg" alt="" width={16} height={16} />Storybook</a></li>
-      </ul>
+      <DocLinks github={githubHref} storybook={storybookHref} />
       <DocTabs panels={panels} />
     </article>
   )

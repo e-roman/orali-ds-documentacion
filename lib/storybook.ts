@@ -21,6 +21,9 @@ export function sourceUrl(kind: "components" | "patterns", slug: string) {
   return `${BLOB}/ui/${slug}.${UI_EXT[slug] ?? "tsx"}`
 }
 
+/** Repositorio de los design tokens (fuente de las foundations). */
+export const TOKENS_REPO = "https://github.com/e-roman/orali-design-tokens"
+
 export const kebab = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "")
 
 /** id de story: "Patterns/Header/Mega menu" + "Open" → patterns-header-mega-menu--open */
