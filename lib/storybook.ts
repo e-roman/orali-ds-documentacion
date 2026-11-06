@@ -21,6 +21,9 @@ export function sourceUrl(kind: "components" | "patterns", slug: string) {
   return `${BLOB}/ui/${slug}.${UI_EXT[slug] ?? "tsx"}`
 }
 
+/** Archivo de Figma del sistema (Orali Ecommerce DS). Privado: abre solo a quien tenga acceso. */
+export const FIGMA = "https://www.figma.com/design/0JYNJACp8FxPdfAT1OgHig"
+
 /** Repositorio de los design tokens (fuente de las foundations). */
 export const TOKENS_REPO = "https://github.com/e-roman/orali-design-tokens"
 

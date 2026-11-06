@@ -1,13 +1,14 @@
 import type { ReactNode } from "react"
 import DocTabs from "./doc-tabs"
-import { REPO, SB } from "@/lib/storybook"
+import { FIGMA, REPO, SB } from "@/lib/storybook"
 
-/** Links externos bajo el título: GitHub y Storybook. */
+/** Links externos bajo el título: GitHub, Storybook y Figma. */
 export function DocLinks({ github, storybook }: { github: string; storybook: string }) {
   return (
     <ul className="doc-links" aria-label="Enlaces externos">
       <li><a href={github} target="_blank" rel="noopener noreferrer"><img src="/github.svg" alt="" width={16} height={16} />GitHub</a></li>
       <li><a href={storybook} target="_blank" rel="noopener noreferrer"><img src="/storybook.svg" alt="" width={16} height={16} />Storybook</a></li>
+      <li><a href={FIGMA} target="_blank" rel="noopener noreferrer"><img src="/Figma.svg" alt="" width={16} height={16} />Figma</a></li>
     </ul>
   )
 }
