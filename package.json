@@ -8,7 +8,7 @@
     "start": "next start -p 3200",
     "sync:assets": "node scripts/sync-shop-assets.mjs",
     "predev": "node scripts/sync-shop-assets.mjs",
-    "prebuild": "node scripts/fetch-shop.mjs && node scripts/sync-shop-assets.mjs",
+    "prebuild": "node scripts/update-tokens.mjs && node scripts/fetch-shop.mjs && node scripts/sync-shop-assets.mjs",
     "prestart": "node scripts/sync-shop-assets.mjs"
   },
   "dependencies": {
