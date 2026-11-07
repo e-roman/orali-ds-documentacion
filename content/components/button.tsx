@@ -321,7 +321,6 @@ export function buttonPanels() {
             ["4.0.0", <>Nuevo <code key="a">button.ghost.*</code>. Alto y padding por jerarquía. <code key="b">button.disabled-opacity</code>. <code key="c">button.outline.bg</code> pasa a blanco.</>],
           ]}
         />
-        <Callout><b>Limitación conocida:</b> existen tokens <code>button.ghost.*</code> pero el componente de la tienda todavía no tiene la variante <code>ghost</code>. Tampoco hay una variante destructiva.</Callout>
       </Section>
     </>
   )

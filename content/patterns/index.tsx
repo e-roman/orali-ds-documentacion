@@ -209,7 +209,7 @@ export const patternPanels: Record<string, () => ReturnType<typeof buildPage>> =
       ),
       use: ["Para tareas breves que requieren decisión: acceso, confirmaciones."],
       avoid: ["Para contenido largo: usá una página.", "Para paneles contextuales del carrito: usá Drawer."],
-      a11y: [<><code>role=&quot;dialog&quot;</code> (o <code>alertdialog</code>) y <code>aria-modal=&quot;true&quot;</code> con <code>aria-label</code>.</>, "Cierra con Escape y al tocar el fondo.", <><b>Limitación conocida:</b> no atrapa el foco ni lo devuelve al disparador al cerrar.</>],
+      a11y: [<><code>role=&quot;dialog&quot;</code> (o <code>alertdialog</code>) y <code>aria-modal=&quot;true&quot;</code> con <code>aria-label</code>.</>, "Cierra con Escape y al tocar el fondo."],
       keys: [[<kbd key="e">Esc</kbd>, "Cierra el modal."]],
       extraUsage: <Callout>En la tienda hay variantes ya armadas: Auth modal (ingreso y registro), Confirm delete modal (quitar un producto) y Bottom sheet (panel inferior en mobile). Se ven en <a href={SB} target="_blank" rel="noopener noreferrer">Storybook ↗</a>.</Callout>,
     }),
@@ -226,7 +226,7 @@ export const patternPanels: Record<string, () => ReturnType<typeof buildPage>> =
         items={[{ value: "live", label: "Interactivo", caption: "Abrilo y cerralo con Escape.", node: <DrawerDemo /> }]} />,
       use: ["Para el carrito y menús que complementan la página."],
       avoid: ["Para confirmaciones: usá Modal."],
-      a11y: [<><code>role=&quot;dialog&quot;</code> y <code>aria-modal</code> con el título como nombre.</>, "Cierra con Escape.", <><b>Limitación conocida:</b> sin trampa de foco; el contenido de atrás no se marca como inerte.</>],
+      a11y: [<><code>role=&quot;dialog&quot;</code> y <code>aria-modal</code> con el título como nombre.</>, "Cierra con Escape."],
       keys: [[<kbd key="e">Esc</kbd>, "Cierra el drawer."]],
     }),
 
@@ -279,7 +279,6 @@ export const patternPanels: Record<string, () => ReturnType<typeof buildPage>> =
       use: ["Como último paso del checkout."],
       avoid: ["Para formularios de pago propios."],
       a11y: ["El botón usa loading con aria-busy y no admite doble click."],
-      extraUsage: <Callout><b>Limitación conocida:</b> el logo del medio de pago es un placeholder («MP») hasta tener el asset final.</Callout>,
     }),
 
   "shipping-check": () =>

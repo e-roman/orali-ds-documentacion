@@ -1,7 +1,6 @@
 import { sizeLabel } from "@/lib/labels"
 import { Heart, Search, ShoppingCart, User, X } from "lucide-react"
 import { buildPage } from "@/components/doc/build-page"
-import { Callout } from "@/components/doc/blocks"
 import { AccordionLive, ChipsLive, RatingLive, TabsLive } from "@/components/doc/demos"
 import Variants from "@/components/doc/variants"
 import { Breadcrumb } from "@shop/components/ui/breadcrumb"
@@ -80,7 +79,6 @@ export const iconButtonPanels = () =>
   buildPage({
     css: "components/icon-button.css",
     history: /icon[- .]button/i,
-    tokenNote: "Todavía no hay tokens icon-button.* en el repo de tokens: usa tokens semánticos.",
     purpose: [
       { title: "Acción compacta", text: "Un botón solo con ícono para acciones conocidas: favoritos, cerrar, buscar." },
       { title: "Siempre redondo", text: "Cuatro tamaños (36, 40, 44, 48 px) con área táctil mínima de 44 px." },
@@ -163,7 +161,6 @@ export const tabsPanels = () =>
   buildPage({
     css: "components/tabs.css",
     history: /\btabs?\b/i,
-    tokenNote: "Todavía no hay tokens tabs.*: usa tokens semánticos.",
     purpose: [
       { title: "Alternar vistas", text: "Muestra una sola sección a la vez dentro del mismo contexto." },
       { title: "Navegación completa", text: "Flechas, Home y End mueven el foco entre pestañas." },
@@ -229,7 +226,6 @@ export const cardPanels = () =>
     css: "components/surfaces.css",
     selector: /\.card/,
     history: /card\.content/i,
-    tokenNote: "El Card de la tienda es una superficie genérica; el layout interno se arma con utilidades.",
     purpose: [
       { title: "Agrupar contenido", text: "Superficie con borde y radio para contenido relacionado." },
       { title: "Variantes de superficie", text: "Cuatro tonos, tres radios, cinco paddings y sombra opcional." },
@@ -378,7 +374,6 @@ export const ratingScalePanels = () =>
   buildPage({
     css: "components/rating-scale.css",
     history: /rating/i,
-    tokenNote: "Todavía no hay tokens rating-scale.*: usa tokens semánticos.",
     purpose: [
       { title: "Pedir un puntaje", text: "Escala numérica para encuestas, por ejemplo NPS del 1 al 10." },
       { title: "Una opción", text: "Cada número es un botón con aria-pressed." },
@@ -471,7 +466,6 @@ export const accordionPanels = () =>
   buildPage({
     css: "components/accordion.css",
     history: /accordion|acordeón/i,
-    tokenNote: "El acordeón de la tienda todavía no es un componente React: son clases CSS que usan las FAQ y el menú mobile.",
     purpose: [
       { title: "Mostrar y ocultar", text: "Expande y contrae secciones de contenido para reducir la carga cognitiva." },
       { title: "Títulos escaneables", text: "El usuario compara temas antes de abrir un panel." },
@@ -484,7 +478,6 @@ export const accordionPanels = () =>
             { value: "default", label: "Default", caption: "Alto táctil de 44 px.", node: <AccordionLive /> },
             { value: "compact", label: "Compact", caption: "Menos padding y texto sm; para menús.", node: <AccordionLive compact /> },
           ]} />
-        <Callout><b>Limitación conocida:</b> no existe un componente <code>Accordion</code> ni tokens <code>accordion.*</code>. Hoy se escribe el markup a mano (<code>.accordion</code>, <code>__item</code>, <code>__trigger</code>, <code>__chevron</code>, <code>__panel</code>).</Callout>
       </>
     ),
     use: ["Para agrupar información relacionada, como preguntas frecuentes.", "Para reducir el scroll cuando el contenido no tiene que verse todo a la vez.", "Cuando el espacio es limitado, como en mobile."],

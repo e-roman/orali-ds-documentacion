@@ -40,7 +40,7 @@ export default function AnatomyStage({ children, markers, legend, parts }: { chi
             )
           })}
         </div>
-        {parts && <p className="caption">Hacé clic en un número para ver las propiedades y los tokens de esa parte.</p>}
+        {parts && <p className="caption">Hacé clic en un número para ver las propiedades y los tokens del elemento.</p>}
       </div>
       <ol className="legend">
         {legend.map((l) => (

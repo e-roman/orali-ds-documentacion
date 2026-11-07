@@ -71,7 +71,7 @@ export function buildPage(c: PageConfig) {
     updates: (
       <Section title="Historial">
         {hist.length === 0 ? (
-          <p className="muted">{c.history ? "Sin cambios registrados en el CHANGELOG de tokens para este componente." : "Los patrones todavía no tienen historial propio: el CHANGELOG del repo de tokens solo registra tokens."}</p>
+          <p className="muted">Sin cambios registrados.</p>
         ) : (
           <Table head={["Versión de tokens", "Cambio"]} rows={hist.map((e) => [e.version, fmt(e.text)])} />
         )}
