@@ -1,45 +1,20 @@
-import type { ReactElement } from "react"
 import { notFound } from "next/navigation"
-import Sidebar from "@/components/sidebar"
-import { DocLinks } from "@/components/component-page"
-import { SB, TOKENS_REPO } from "@/lib/storybook"
+import { PageHeader } from "ds-docs-theme/docs/blocks"
+import { FoundationView } from "ds-docs-theme/docs/foundation-views"
 import { foundations } from "@/lib/nav"
-import {
-  BorderView, ColorView, ElevationView, IconographyView, LayerView, MotionView, RadiusView, SpacingView, TokensView, TypographyView,
-} from "@/components/foundations/views"
+import { foundationOptions } from "@/lib/foundation-pages"
+import { allTokens, links } from "@/lib/project"
 
-const views: Record<string, () => ReactElement> = {
-  tokens: TokensView,
-  color: ColorView,
-  typography: TypographyView,
-  spacing: SpacingView,
-  radius: RadiusView,
-  elevation: ElevationView,
-  layer: LayerView,
-  motion: MotionView,
-  border: BorderView,
-  iconography: IconographyView,
-}
+export const generateStaticParams = () => foundations.map((f) => ({ slug: f.slug }))
 
-export function generateStaticParams() {
-  return foundations.map((f) => ({ slug: f.slug }))
-}
-
-export default function Page({ params }: { params: { slug: string } }) {
-  const item = foundations.find((f) => f.slug === params.slug)
-  const View = views[params.slug]
-  if (!item || !View) notFound()
+export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
+  const item = foundations.find((f) => f.slug === slug)
+  if (!item) notFound()
   return (
-    <div className="shell">
-      <Sidebar title="Foundations" base="/foundations" items={foundations} />
-      <main className="doc-page">
-        <article>
-          <h1 className="doc-h1">{item.title}</h1>
-          <p className="lead">{item.description}</p>
-          <DocLinks github={TOKENS_REPO} storybook={SB} />
-          <View />
-        </article>
-      </main>
-    </div>
+    <>
+      <PageHeader title={item.title} description={item.description} links={{ github: links.tokensRepo, storybook: links.storybook, figma: links.figma }} />
+      <FoundationView slug={slug} tokens={allTokens()} options={foundationOptions} />
+    </>
   )
 }

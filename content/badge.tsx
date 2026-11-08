@@ -1,0 +1,65 @@
+import type { ReactNode } from "react"
+import type { Piece, Story } from "ds-docs-theme/types"
+import { Badge, type BadgeVariant } from "@shop/components/ui/badge"
+import { sourceUrl } from "@/lib/storybook"
+import { iso } from "./iso"
+
+const ITEMS: { v: BadgeVariant; label: string; text: string; caption: string; fg: string; bg: string }[] = [
+  { v: "discount", label: "Discount", text: "-15%", caption: "Descuento sobre un producto. Borde y texto en tomato sobre blanco.", fg: "badge-discount-fg", bg: "badge-discount-bg" },
+  { v: "dietary", label: "Dietary", text: "Vegano", caption: "Característica del producto: Vegano, Sin TACC, Premium. Fondo sage.", fg: "badge-dietary-fg", bg: "badge-dietary-bg" },
+  { v: "counter", label: "Counter", text: "3", caption: "Cantidad sobre un ícono (por ejemplo el carrito). Siempre redondo.", fg: "badge-counter-fg", bg: "badge-counter-bg" },
+  { v: "outline", label: "Outline", text: "4 packs", caption: "Contador de packs en títulos (carrito, drawer). Con borde y fondo blanco.", fg: "color-text-brand", bg: "color-surface-default" },
+]
+
+const story = (id: string, label: string, node: ReactNode, caption?: string): Story => ({ id: `badge-${id}`, label, caption, node: iso(node) })
+
+export const badgePiece: Piece = {
+  slug: "badge", group: "components", title: "Badge", file: sourceUrl("components", "badge"),
+  description: "Etiquetas de descuento, dieta y contador.",
+  docsId: "",
+  purpose: [
+    { title: "Etiquetar", text: "Marca un producto con una característica corta: descuento, dieta, premium." },
+    { title: "Contar", text: "Muestra una cantidad sobre un ícono o junto a un título." },
+    { title: "No es una acción", text: "Un badge informa, no se presiona. Para acciones usá un Button." },
+  ],
+  anatomy: {
+    story: "badge-anatomy", width: 360,
+    parts: [
+      { n: 1, label: "Contenedor", selector: ".badge", side: "left" },
+      { n: 2, label: "Label", note: "texto o número", selector: ".badge", side: "bottom" },
+    ],
+    node: iso(<Badge variant="dietary">Sin TACC</Badge>),
+  },
+  stories: [],
+  groups: [
+    {
+      title: "Variante",
+      intro: "La prop `variant` define colores, radio y tipografía. Discount y dietary usan radio de 4 px para no competir con los CTA pill; counter es redondo.",
+      stories: ITEMS.map((x) => story(`variant-${x.v}`, x.label, <Badge variant={x.v}>{x.text}</Badge>, x.caption)),
+    },
+  ],
+  props: [
+    ["variant", "\"discount\" | \"dietary\" | \"counter\" | \"outline\"", "Colores, radio y tipografía.", true],
+    ["className", "string", "Clases extra."],
+  ],
+  tokenPrefixes: ["badge-"],
+  use: ["Para destacar una característica corta de un producto.", "Para mostrar un descuento o una cantidad.", "Con texto breve: una o dos palabras, o un número."],
+  avoid: ["Para una acción o navegación: usá Button o un link.", "Para mensajes largos o importantes: usá un aviso (callout).", "Más de uno o dos badges sobre el mismo producto."],
+  practices: [
+    { ok: true, title: "Texto corto", text: "Una o dos palabras se leen de un vistazo.", storyId: "p1", node: iso(<Badge variant="dietary">Vegano</Badge>) },
+    { ok: false, title: "Evitá frases largas", text: "El badge pierde su función de etiqueta.", storyId: "p2", node: iso(<Badge variant="dietary">Producto elaborado sin ingredientes de origen animal</Badge>) },
+  ],
+  a11y: [
+    "Es un `<span>` sin rol: el texto se lee como contenido normal.",
+    "No transmitas información solo con el color: el texto del badge debe decirlo (por ejemplo «Vegano», no solo un fondo verde).",
+    "Un counter suelto es solo un número: acompañalo de un texto accesible en el elemento que lo contiene (por ejemplo `aria-label=\"Carrito, 3 productos\"`).",
+  ],
+  contrast: ITEMS.map((x) => ({ element: x.label, fg: x.fg, bg: x.bg })),
+  historyColumn: "Versión de tokens",
+  history: [
+    { date: "4.0.0", text: "`badge.discount.padding-y` de 2 a 6 px (`space.1-5`)." },
+    { date: "3.0.0", text: "`badge.dietary.font-size` de 11 a 12 px." },
+    { date: "2.0.0", text: "Discount y dietary pasan de `radius.full` a `radius.sm` (4 px). El counter sigue redondo." },
+    { date: "1.1.0", text: "Nuevo `badge.counter`." },
+  ],
+}
