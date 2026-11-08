@@ -3,6 +3,8 @@ import { ArrowRight, ShoppingCart } from "lucide-react"
 import type { Piece, Story } from "ds-docs-theme/types"
 import { Button, type ButtonVariant } from "@shop/components/ui/button"
 import { sourceUrl } from "@/lib/storybook"
+import { Callout, Panel, Table } from "./compat/blocks"
+import { Swatch, val } from "./compat/token-ui"
 import { iso, row } from "./iso"
 
 const CTA = "Button CTA"
@@ -16,6 +18,13 @@ const VARIANTS: { v: ButtonVariant; label: string; caption: string; dark?: boole
   { v: "outline-inverse", label: "Outline inverse", dark: true, caption: "Botón con borde sobre foto. Alternativa secundaria a Inverse." },
   { v: "link", label: "Link", caption: "Acción con peso de texto, sin fondo: ver detalle, editar dirección." },
 ]
+/** Para las tablas: las siete de arriba más Add to cart, que se muestra solo ahí. */
+const ALL = [
+  VARIANTS[0],
+  { v: "add-to-cart" as ButtonVariant, label: "Add to cart", caption: "Agregar desde una card o la ficha de producto. Al agregar, lo reemplaza el Stepper. Ocupa todo el ancho.", dark: undefined },
+  ...VARIANTS.slice(1),
+]
+const STATES = ["default", "hover", "active", "focus", "disabled"] as const
 const SIZES = [
   { s: "sm", label: "Small" }, { s: "md", label: "Medium" }, { s: "lg", label: "Large" }, { s: "xl", label: "Extra large" },
 ] as const
@@ -26,6 +35,7 @@ const story = (id: string, label: string, node: ReactNode, caption?: string, dar
 const contrastRows = VARIANTS.filter((x) => x.v !== "link" && x.v !== "outline-inverse").flatMap((x) => [
   { element: `${x.label} · default`, fg: `button-${x.v}-fg`, bg: `button-${x.v}-bg` },
   { element: `${x.label} · hover`, fg: x.v === "outline" ? "button-outline-fg-hover" : `button-${x.v}-fg`, bg: `button-${x.v}-bg-hover` },
+  { element: `${x.label} · active`, fg: x.v === "outline" ? "button-outline-fg-active" : `button-${x.v}-fg`, bg: `button-${x.v}-bg-active` },
 ])
 
 export const buttonPiece: Piece = {
@@ -57,7 +67,7 @@ export const buttonPiece: Piece = {
     {
       title: "Tamaño",
       intro: "La prop `size` define alto, padding, gap, tipografía e ícono. Permite ajustar el peso visual de la acción a la densidad del layout.",
-      stories: SIZES.map(({ s, label }) => story(`size-${s}`, label, <Button variant="primary" size={s}>{CTA}</Button>)),
+      stories: SIZES.map(({ s, label }) => story(`size-${s}`, label, <Button variant="primary" size={s}>{CTA}</Button>, `${label}: ${val(`button-size-${s}-height`)} de alto, tipografía ${val(`button-size-${s}-font-size`)} / ${val(`button-size-${s}-line-height`)}.`)),
     },
     {
       title: "Forma",
@@ -104,6 +114,18 @@ export const buttonPiece: Piece = {
     ["loadingText", "string", "Texto mientras carga."],
   ],
   tokenPrefixes: ["button-"],
+  // la más larga primero: `outline-inverse` antes que `outline`
+  tokenGroup: {
+    title: "Variante",
+    of: (name) => {
+      const x = [...ALL].sort((a, b) => b.v.length - a.v.length).find((v) => name.startsWith(`button-${v.v}-`))
+      if (x) return x.label
+      const size = SIZES.find(({ s }) => name.startsWith(`button-size-${s}-`))
+      if (size) return `Tamaño ${size.label}`
+      if (name.startsWith("button-ghost-")) return "Ghost"
+      return name.startsWith("button-shape-") ? "Forma" : "Todas"
+    },
+  },
   use: ["Para acciones del flujo de compra: agregar, continuar, finalizar.", "Para acciones de formulario y de cuenta.", "Un solo Primary por sección visible."],
   avoid: ["Para navegar: usá un link (`<a href>`), aunque tenga estilo de botón.", "Para mostrar un estado o una etiqueta: eso es un Badge."],
   practices: [
@@ -121,6 +143,124 @@ export const buttonPiece: Piece = {
   keyboard: [
     { keys: ["Tab", "Shift+Tab"], action: "Mueve el foco. Orden natural, sin `tabindex` positivo." },
     { keys: ["Enter", "Espacio"], action: "Activa un `<button>`. Un `<a>` solo responde a Enter." },
+  ],
+  extras: [
+    {
+      tab: "design", title: "Tokens por variante",
+      node: (
+        <div className="space-y-6">
+          <p className="text-sm text-muted-foreground">Se leen en vivo del paquete de tokens. Pasá el mouse por un color para ver el token.</p>
+          <Table
+            head={["Variante", "Fondo", "Hover", "Active", "Texto", "Borde"]}
+            rows={ALL.map((x) => [
+              <b key="n">{x.label}</b>,
+              <Swatch key="a" name={`button-${x.v}-bg`} />,
+              <Swatch key="b" name={`button-${x.v}-bg-hover`} />,
+              <Swatch key="c" name={`button-${x.v}-bg-active`} />,
+              <Swatch key="d" name={`button-${x.v}-fg`} />,
+              <Swatch key="e" name={`button-${x.v}-border`} />,
+            ])}
+          />
+          <h3 className="text-base font-semibold">Tokens por tamaño</h3>
+          <Table
+            head={["Tamaño", "Alto", "Padding (y / x)", "Gap", "Tipografía", "Ícono"]}
+            rows={SIZES.map(({ s, label }) => [
+              <b key="s">{label}</b>,
+              val(`button-size-${s}-height`),
+              `${val(`button-size-${s}-padding-y`)} / ${val(`button-size-${s}-padding-x`)}`,
+              val(`button-size-${s}-gap`),
+              `${val(`button-size-${s}-font-size`)} / ${val(`button-size-${s}-line-height`)}`,
+              val(`button-size-${s}-icon-size`),
+            ])}
+          />
+        </div>
+      ),
+    },
+    {
+      tab: "design", title: "Estados",
+      node: (
+        <div className="space-y-3">
+          <p className="text-sm text-muted-foreground">Estados forzados con clases solo para mostrarlos fijos. Los botones reales responden a hover, foco con Tab y click.</p>
+          <Table
+            head={["Variante", ...STATES]}
+            rows={ALL.map((x) => [
+              <b key="n">{x.label}</b>,
+              ...STATES.map((st) => (
+                <div key={st} className={x.dark ? "rounded-md bg-neutral-800 p-2" : undefined}>
+                  {iso(<Button variant={x.v} size="md" className={st === "default" || st === "disabled" ? undefined : `is-${st}`} disabled={st === "disabled"} tabIndex={-1}>{CTA}</Button>)}
+                </div>
+              )),
+            ])}
+          />
+        </div>
+      ),
+    },
+    {
+      tab: "design", title: "Uso",
+      node: (
+        <pre className="overflow-x-auto rounded-lg border bg-muted p-4 font-mono text-xs"><code>{`import { Button, buttonClasses } from "@/components/ui/button"
+
+<Button variant="add-to-cart">Button CTA</Button>
+<Button size="lg" shape="pill">Button CTA</Button>
+<Button loading loadingText="Procesando…">Button CTA</Button>
+
+// Link con estilo de botón
+<Link href="/productos" className={buttonClasses({ variant: "primary", shape: "pill" })}>Ver productos</Link>`}</code></pre>
+      ),
+    },
+    {
+      tab: "usage", title: "Botón o link",
+      node: (
+        <div className="space-y-3">
+          <Table
+            head={["Elemento", "Cuándo", "Ejemplo"]}
+            rows={[
+              [<code key="b">&lt;button&gt;</code>, "Ejecuta una acción en la misma pantalla", "Agregar, Aplicar cupón, abrir el carrito"],
+              [<code key="a">&lt;a href&gt;</code>, "Lleva a otra URL, aunque se vea como botón", "«Ver productos» en un hero, «Ver todos»"],
+            ]}
+          />
+          <Callout>La jerarquía <b>Link</b> es solo visual: el elemento depende de lo que hace. Para un <code>&lt;a&gt;</code> con estilo de botón usá <code>buttonClasses()</code>.</Callout>
+        </div>
+      ),
+    },
+    {
+      tab: "usage", title: "Jerarquías",
+      node: (
+        <Table
+          head={["Jerarquía", "Cuándo"]}
+          rows={ALL.map((x) => [
+            <div key="b" className={x.dark ? "rounded-md bg-neutral-800 p-2" : undefined}>{iso(<Button variant={x.v}>{CTA}</Button>)}</div>,
+            <span key="t"><b>{x.label}.</b> {x.caption}</span>,
+          ])}
+        />
+      ),
+    },
+    {
+      tab: "accessibility", title: "Foco",
+      node: (
+        <Panel caption={<>Anillo <code>button.focus-ring</code> de 2 px con offset de 2 px, solo con <code>:focus-visible</code>. Sobre foto u oscuro se usa el foco inverso.</>}>
+          <div className="row row--wrap align-center gap-3x">
+            <Button className="is-focus">{CTA}</Button>
+            <Button variant="neutral" className="is-focus">{CTA}</Button>
+            <Button variant="link" className="is-focus">{CTA}</Button>
+          </div>
+        </Panel>
+      ),
+    },
+    {
+      tab: "accessibility", title: "Tamaño del target",
+      node: (
+        <div className="space-y-3">
+          <Panel caption="El mínimo táctil recomendado es de 44 px de alto.">
+            <div className="row row--wrap align-center gap-3x">{SIZES.map(({ s }) => <Button key={s} size={s}>{CTA}</Button>)}</div>
+          </Panel>
+          <ul className="list-disc space-y-1 pl-5 text-sm">
+            <li><b>lg</b> y <b>xl</b> cumplen 44 px.</li>
+            <li><b>sm</b> y <b>md</b>: usalos solo en desktop o a ancho completo (por ejemplo Add to cart en una card).</li>
+          </ul>
+        </div>
+      ),
+    },
   ],
   contrast: contrastRows,
   historyColumn: "Versión de tokens",

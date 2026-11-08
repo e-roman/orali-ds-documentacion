@@ -55,3 +55,12 @@
 .demo-tabpanel { padding: 16px 4px; }
 .demo-card-body { padding: 4px; }
 .demo-card-sub { font-size: 14px; }
+
+/* Badge: contador posicionado sobre un ícono */
+.badge-anchor { position: relative; display: inline-flex; }
+.badge-anchor__count { position: absolute; top: -6px; right: -8px; }
+
+/* Button: estados forzados para mostrarlos fijos */
+.btn.is-hover { background-color: var(--btn-bg-h); color: var(--btn-fg-h); }
+.btn.is-active { background-color: var(--btn-bg-a); color: var(--btn-fg-a); }
+.btn.is-focus { outline: var(--button-focus-width) solid var(--button-focus-ring); outline-offset: var(--button-focus-offset); }
