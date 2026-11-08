@@ -153,7 +153,7 @@ export const buttonPiece: Piece = {
           <Table
             head={["Variante", "Fondo", "Hover", "Active", "Texto", "Borde"]}
             rows={ALL.map((x) => [
-              <b key="n">{x.label}</b>,
+              <span key="n">{x.label}</span>,
               <Swatch key="a" name={`button-${x.v}-bg`} />,
               <Swatch key="b" name={`button-${x.v}-bg-hover`} />,
               <Swatch key="c" name={`button-${x.v}-bg-active`} />,
@@ -165,7 +165,7 @@ export const buttonPiece: Piece = {
           <Table
             head={["Tamaño", "Alto", "Padding (y / x)", "Gap", "Tipografía", "Ícono"]}
             rows={SIZES.map(({ s, label }) => [
-              <b key="s">{label}</b>,
+              <span key="s">{label}</span>,
               val(`button-size-${s}-height`),
               `${val(`button-size-${s}-padding-y`)} / ${val(`button-size-${s}-padding-x`)}`,
               val(`button-size-${s}-gap`),
@@ -184,7 +184,7 @@ export const buttonPiece: Piece = {
           <Table
             head={["Variante", ...STATES]}
             rows={ALL.map((x) => [
-              <b key="n">{x.label}</b>,
+              <span key="n">{x.label}</span>,
               ...STATES.map((st) => (
                 <div key={st} className={x.dark ? "rounded-md bg-neutral-800 p-2" : undefined}>
                   {iso(<Button variant={x.v} size="md" className={st === "default" || st === "disabled" ? undefined : `is-${st}`} disabled={st === "disabled"} tabIndex={-1}>{CTA}</Button>)}
