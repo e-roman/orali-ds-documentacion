@@ -1,15 +1,16 @@
-import SectionIndex from "@/components/section-index"
+import { SectionIndex } from "ds-docs-theme/docs/blocks"
 import { foundations } from "@/lib/nav"
+
+export const metadata = { title: "Foundations · Orali Design System" }
 
 export default function Page() {
   return (
-    <main className="doc-page">
-      <SectionIndex
-        title="Foundations"
-        base="/foundations"
-        items={foundations}
-        intro="Los fundamentos del sistema Orali: color, tipografía, spacing y tokens que garantizan consistencia entre Figma y el sitio."
-      />
-    </main>
+    <SectionIndex
+      title="Foundations"
+      intro="Los fundamentos del sistema Orali: color, tipografía, spacing y tokens que garantizan consistencia entre Figma y el sitio."
+      base="/foundations"
+      group="foundations"
+      items={foundations}
+    />
   )
 }

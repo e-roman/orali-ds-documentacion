@@ -1,0 +1,34 @@
+import path from "node:path"
+import type { NextConfig } from "next"
+
+/**
+ * Los componentes reales viven en ../tienda-orali (se importan como @shop/*, solo lectura).
+ * Turbopack necesita la carpeta padre como raíz para poder leerlos; lucide, clsx y sonner se fuerzan a resolver desde este proyecto
+ * para no duplicarlos. El CSS de la tienda (Tailwind 3) se compila aparte a public/shop.css y se carga solo dentro de los shadow roots.
+ */
+const here = process.cwd()
+
+const nextConfig: NextConfig = {
+  // El código de la tienda (solo lectura) trae sus propios @types/react 18 y tiene dos choques con los tipos de React 19 (nav.tsx, search-field.tsx).
+  // En runtime no afecta; el chequeo de tipos del build se desactiva hasta que la tienda suba a React 19. `npx tsc --noEmit` muestra solo esos errores.
+  typescript: { ignoreBuildErrors: true },
+  transpilePackages: ["ds-docs-theme", "@orali/design-tokens"],
+  images: {
+    unoptimized: true,
+    remotePatterns: [
+      { protocol: "https", hostname: "www.tiendaorali.com", pathname: "/**" },
+      { protocol: "https", hostname: "pastasorali.com", pathname: "/**" },
+    ],
+  },
+  turbopack: {
+    root: path.join(here, ".."),
+    resolveAlias: {
+      "lucide-react": "./node_modules/lucide-react",
+      clsx: "./node_modules/clsx",
+      sonner: "./node_modules/sonner",
+    },
+    rules: { "*.css": { loaders: ["@tailwindcss/turbopack"], as: "*.css" } },
+  },
+}
+
+export default nextConfig
