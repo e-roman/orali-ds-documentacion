@@ -8,7 +8,7 @@
     "start": "next start -p 3200",
     "build:shop-css": "node scripts/build-shop-css.mjs",
     "sync:assets": "node scripts/sync-shop-assets.mjs",
-    "predev": "node scripts/sync-shop-assets.mjs && node scripts/build-shop-css.mjs",
+    "predev": "node scripts/fetch-shop.mjs && node scripts/sync-shop-assets.mjs && node scripts/build-shop-css.mjs",
     "prebuild": "node scripts/update-tokens.mjs && node scripts/fetch-shop.mjs && node scripts/sync-shop-assets.mjs && node scripts/build-shop-css.mjs",
     "prestart": "node scripts/sync-shop-assets.mjs"
   },

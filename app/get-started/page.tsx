@@ -82,7 +82,7 @@ export default { presets: [oraliTokens] }`}</code></pre>
         <h3 className={h3}>Correr esta documentación</h3>
         <pre className={code}><code>{`npm install
 npm run dev     # http://localhost:3200`}</code></pre>
-        <p className="text-sm text-muted-foreground">Necesita <code>tienda-orali</code> y <code>ds-docs-theme</code> en la carpeta vecina: importa sus componentes y estilos en modo lectura.</p>
+        <p className="text-sm text-muted-foreground">Necesita <code>tienda-orali</code> y <code>ds-docs-theme</code> en la carpeta vecina: copia sus componentes y estilos a una carpeta local (<code>shop/</code>) antes de arrancar.</p>
       </Section>
     </PageContainer>
   )

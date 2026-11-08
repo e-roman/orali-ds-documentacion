@@ -64,7 +64,7 @@ export const token = (name: string) => allTokens().find((t) => t.name === name)
 /** Tokens globales que usa un archivo CSS de la tienda (var(--x) que existen en tokens.css), en orden de aparición.
  *  `selector` limita a las reglas cuyo selector coincide (para archivos compartidos como surfaces.css). */
 export function tokensUsedBy(cssFile: string, selector?: RegExp): Token[] {
-  const file = path.join(process.cwd(), "..", "tienda-orali", "styles", cssFile)
+  const file = path.join(process.cwd(), "shop", "styles", cssFile)
   let css = ""
   try { css = fs.readFileSync(file, "utf8") } catch { return [] }
   if (selector) {

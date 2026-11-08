@@ -7,10 +7,10 @@ import os from "node:os"
 import path from "node:path"
 import { execFileSync } from "node:child_process"
 
-const shop = path.resolve("..", "tienda-orali")
+const shop = path.resolve("shop")
 const docs = process.cwd()
 if (!fs.existsSync(path.join(shop, "app/globals.css"))) {
-  console.error("build-shop-css: no existe ../tienda-orali (corré scripts/fetch-shop.mjs)")
+  console.error("build-shop-css: no existe ./shop (corré scripts/fetch-shop.mjs)")
   process.exit(1)
 }
 
