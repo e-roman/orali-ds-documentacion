@@ -12,14 +12,6 @@ const ITEMS: { v: BadgeVariant; label: string; text: string; caption: string; fg
   { v: "outline", label: "Outline", text: "4 packs", caption: "Contador de packs en títulos (carrito, drawer). Con borde y fondo blanco.", fg: "color-text-brand", bg: "color-surface-default" },
 ]
 
-/** Cada variante trae su tamaño: no hay prop `size`. Valores de styles/components/badge.css. */
-const SIZES: Record<BadgeVariant, string> = {
-  discount: "Texto de 12 px en negrita, padding de 6 px y radio de 4 px.",
-  dietary: "Texto de 12 px, padding de 2 px arriba y abajo y 8 px a los lados, radio de 4 px.",
-  outline: "Texto de 12 px, padding de 4 px arriba y abajo y 8 px a los lados, redondo.",
-  counter: "16 px de alto y de ancho mínimo, texto de 11 px en negrita, redondo.",
-}
-
 const story = (id: string, label: string, node: ReactNode, caption?: string): Story => ({ id: `badge-${id}`, label, caption, node: iso(node) })
 
 export const badgePiece: Piece = {
@@ -45,11 +37,6 @@ export const badgePiece: Piece = {
       title: "Variante",
       intro: "La prop `variant` define colores, radio y tipografía. Discount y dietary usan radio de 4 px para no competir con los CTA pill; counter es redondo.",
       stories: ITEMS.map((x) => story(`variant-${x.v}`, x.label, <Badge variant={x.v}>{x.text}</Badge>, x.caption)),
-    },
-    {
-      title: "Tamaño",
-      intro: "El badge no tiene una prop de tamaño: cada variante trae el suyo, definido por sus tokens. Así el peso visual de cada etiqueta es siempre el mismo.",
-      stories: ITEMS.map((x) => story(`size-${x.v}`, x.label, <Badge variant={x.v}>{x.text}</Badge>, SIZES[x.v])),
     },
     {
       title: "Contador sobre un ícono",
