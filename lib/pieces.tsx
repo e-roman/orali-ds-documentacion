@@ -1,4 +1,4 @@
-import type { Piece } from "ds-docs-theme/types"
+import type { Anatomy, InspectGroup, Piece } from "ds-docs-theme/types"
 import { badgePiece } from "@/content/badge"
 import { iso } from "@/content/iso"
 import LiveStory from "@/content/live"
@@ -65,7 +65,25 @@ const ownPieces: Piece[] = [
   ...ownPatterns.filter((p) => patternPanels[p.slug]).map((p) => fromPanels("patterns", p, patternPanels[p.slug]())),
 ]
 
-export const pieces: Piece[] = [buttonPiece, badgePiece, ...ownPieces, ...sbPatterns.map(fromSb)].map((p) => ({ ...p, hideEmptyProps: true }))
+/** Lo que el inspector muestra por defecto en una parte sin `only` (todo salvo el ancho). */
+const DEFAULT_GROUPS: InspectGroup[] = ["fondo", "texto", "borde", "radio", "padding", "gap", "alto", "tipografia"]
+
+/**
+ * Cuando el contenedor y el label son el mismo elemento (ej. `.btn`), el texto —color y tipografía— lo muestra el Label.
+ * Al Contenedor se le quitan esos dos grupos para que las partes no repitan lo mismo.
+ */
+function dedupeParts(a: Anatomy): Anatomy {
+  return {
+    ...a,
+    parts: a.parts.map((p) => {
+      if (p.only) return p
+      const textSibling = a.parts.some((o) => o !== p && o.selector === p.selector && o.only?.includes("tipografia"))
+      return textSibling ? { ...p, only: DEFAULT_GROUPS.filter((g) => g !== "texto" && g !== "tipografia") } : p
+    }),
+  }
+}
+
+export const pieces: Piece[] = [buttonPiece, badgePiece, ...ownPieces, ...sbPatterns.map(fromSb)].map((p) => ({ ...p, hideEmptyProps: true, anatomy: p.anatomy && dedupeParts(p.anatomy) }))
 
 export const piecesOf = (group: Piece["group"]) => pieces.filter((p) => p.group === group).sort((a, b) => a.title.localeCompare(b.title))
 export const pieceBySlug = (group: Piece["group"], slug: string) => pieces.find((p) => p.group === group && p.slug === slug)
