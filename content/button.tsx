@@ -51,9 +51,9 @@ export const buttonPiece: Piece = {
     story: "button-anatomy", width: 520,
     parts: [
       { n: 1, label: "Contenedor", selector: ".btn", side: "left" },
-      { n: 2, label: "Label", selector: ".btn", side: "bottom" },
-      { n: 3, label: "Ícono izquierdo", note: "opcional", selector: ".btn > svg:first-child", side: "top", pct: 22 },
-      { n: 4, label: "Ícono derecho", note: "opcional", selector: ".btn > svg:last-child", side: "top", pct: 86 },
+      { n: 2, label: "Label", selector: ".btn", only: ["texto", "tipografia"], side: "bottom" },
+      { n: 3, label: "Ícono izquierdo", note: "opcional", selector: ".btn > svg:first-child", only: ["texto", "ancho", "alto"], side: "top", pct: 22 },
+      { n: 4, label: "Ícono derecho", note: "opcional", selector: ".btn > svg:last-child", only: ["texto", "ancho", "alto"], side: "top", pct: 86 },
     ],
     node: iso(<Button variant="primary" size="xl"><ShoppingCart className="icon-md" aria-hidden />{CTA}<ArrowRight className="icon-md" aria-hidden /></Button>),
   },

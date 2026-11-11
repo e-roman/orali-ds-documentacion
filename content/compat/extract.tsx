@@ -1,5 +1,5 @@
 import { Children, Fragment, isValidElement, type ReactElement, type ReactNode } from "react"
-import type { Piece, Story, StoryGroup } from "ds-docs-theme/types"
+import type { InspectGroup, Piece, Story, StoryGroup } from "ds-docs-theme/types"
 import { iso } from "@/content/iso"
 import { allTokens } from "@/lib/project"
 import { tokensUsedBy } from "@/lib/orali-tokens"
@@ -69,7 +69,7 @@ export function extractPiece(slug: string, panels: Record<Tab, ReactNode>) {
     } else if (e.type === Anatomy) {
       const markers = p.markers as { n: number; side: "top" | "bottom" | "left" | "right"; pct?: number }[]
       const legend = p.legend as { n: number; label: string; note?: string }[]
-      const parts = (p.parts as { n: number; selector: string }[] | undefined) ?? []
+      const parts = (p.parts as { n: number; selector: string; only?: InspectGroup[] }[] | undefined) ?? []
       out.anatomy = {
         story: `${slug}-anatomy`,
         node: iso(p.children as ReactNode),
@@ -77,7 +77,7 @@ export function extractPiece(slug: string, panels: Record<Tab, ReactNode>) {
         parts: legend.flatMap((l) => {
           const m = markers.find((x) => x.n === l.n)
           const s = parts.find((x) => x.n === l.n)
-          return m && s ? [{ n: l.n, label: l.label, note: l.note, selector: s.selector, side: m.side, pct: m.pct }] : []
+          return m && s ? [{ n: l.n, label: l.label, note: l.note, selector: s.selector, only: s.only, side: m.side, pct: m.pct }] : []
         }),
       }
     } else if (e.type === Variants) {

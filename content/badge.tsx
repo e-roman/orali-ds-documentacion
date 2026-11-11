@@ -27,7 +27,7 @@ export const badgePiece: Piece = {
     story: "badge-anatomy", width: 360,
     parts: [
       { n: 1, label: "Contenedor", selector: ".badge", side: "left" },
-      { n: 2, label: "Label", note: "texto o número", selector: ".badge", side: "bottom" },
+      { n: 2, label: "Label", note: "texto o número", selector: ".badge", only: ["texto", "tipografia"], side: "bottom" },
     ],
     node: iso(<Badge variant="dietary">Sin TACC</Badge>),
   },
