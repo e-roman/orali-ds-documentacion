@@ -15,7 +15,7 @@
   "dependencies": {
     "@orali/design-tokens": "github:e-roman/orali-design-tokens#v4.1.0",
     "clsx": "^2.1.1",
-    "ds-docs-theme": "github:e-roman/ds-docs-theme#v1.2.0",
+    "ds-docs-theme": "github:e-roman/ds-docs-theme#v1.3.0",
     "lucide-react": "0.383.0",
     "next": "16.4.5",
     "react": "19.3.0",
